@@ -1,0 +1,40 @@
+---
+layout: base
+pagination:
+  data: daily
+  size: 1
+permalink: "daily/{{ pagination.items[0].date|formatDate('YYYY-MM-DD') }}/index.html"
+---
+{% set record = pagination.items[0] %}
+
+<div class="daily">
+  <div class="daily__title">
+    <h1>COVID19 in Austria</h1>
+    <div class="tagline">Dashboard</div>
+  </div>
+  <div class="daily__date">
+    <div class="weekday">{{ record.date | formatDate('dddd') }}</div>
+    <div class="date">{{ record.date | formatDate('MMMM DD, YYYY') }}</div >
+  </div>
+  {%- if pagination.pageNumber > 0 %}
+  <nav class="daily__date-nav daily__date-nav--previous">
+      <a href="{{ pagination.href.previous }}">Previous day</a>
+      <div class="date">{{ pagination.page.previous.date | formatDate('MMM DD') }}</div>
+  </nav>
+  {% endif -%}
+  {%- if pagination.page.next %}
+  <nav class="daily__date-nav daily__date-nav--next">
+      <a href="{{ pagination.href.next }}">Next day</a>
+      <div class="date">{{ pagination.page.next.date | formatDate('MMM DD') }}</div>
+  </nav>
+  {% endif -%}
+  <div class="daily__number daily__number--cases-day">
+    <div class="number">{{ record.austria.casesDaily }}</div>
+    <div class="description">New cases</div>
+  </div>
+</div>
+
+<pre>
+{{ record | formatJSON }}
+</pre>
+

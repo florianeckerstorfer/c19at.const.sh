@@ -1,0 +1,27 @@
+{
+  "name": "covid19-at.const.sh",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "eleventy --serve",
+    "clean": "rimraf ./dist"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@11ty/eleventy": "^0.12.1",
+    "dayjs": "^1.10.4",
+    "fast-glob": "^3.2.5",
+    "lodash": "^4.17.21",
+    "md5": "^2.3.0",
+    "neat-csv": "^6.0.1",
+    "node-fetch": "^2.6.1",
+    "postcss": "^8.2.12",
+    "postcss-clean": "^1.2.2",
+    "postcss-import": "^14.0.1",
+    "rimraf": "^2.7.1",
+    "sharp": "^0.28.1"
+  }
+}

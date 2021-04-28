@@ -1,0 +1,6 @@
+{
+  "apexskier.typescript.config.isEnabledForJavascript" : "Disable",
+  "index.ignored_file_patterns" : [
+    "dist\/"
+  ]
+}

@@ -1,0 +1,133 @@
+.daily {
+  display: grid;
+  gap: 1rem;
+  padding: 1rem;
+  background: var(--dashboard-bg-color);
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-areas:
+    'date date'
+    'nav-previous nav-next'
+    'title title'
+    'cases-day cases-day';
+}
+
+@media screen and (min-width: 425px) {
+  .daily {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-areas:
+      'nav-previous date nav-next'
+      'title title cases-day';
+  }
+}
+
+.daily > * {
+  background: var(--box-bg-color);
+  border-radius: 1.5rem;
+}
+
+.daily__title {
+  background: var(--yoga-flame);
+  color: var(--black-violet);
+  grid-area: title;
+  padding: 1rem 0.5rem;
+  text-align: center;
+}
+
+.daily__title h1 {
+  font-size: var(--title-font-size);
+  font-weight: var(--title-font-weight);
+  margin: 0;
+}
+
+.daily__title .tagline {
+  font-size: var(--tagline-font-size);
+  font-weight: var(--tagline-font-weight);
+  text-transform: uppercase;
+}
+
+.daily__date {
+  background: var(--faraway-sky);
+  color: var(--pearl);
+  display: flex;
+  flex-direction: column;
+  grid-area: date;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 1.5rem 0.5rem;
+}
+
+.daily__date .date {
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.daily__date-nav {
+  padding: 2.25rem 1rem 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.daily__date-nav .date {
+  font-size: var(--tagline-font-size);
+  font-weight: var(--tagline-font-weight);
+}
+
+.daily__date-nav--previous {
+  grid-area: nav-previous;
+  align-items: flex-start;
+}
+
+.daily__date-nav--next {
+  grid-area: nav-next;
+  align-items: flex-end;
+}
+
+.daily__date-nav a {
+  display: block;
+  font-size: 1.25rem;
+  font-weight: 700;
+  position: relative;
+}
+
+.daily__date-nav--next a {
+  text-align: right;
+}
+
+.daily__date-nav--previous a::before,
+.daily__date-nav--next a::after {
+  position: absolute;
+  top: -1.25rem;
+}
+
+.daily__date-nav--previous a::before {
+  left: 0;
+  content: '←';
+}
+
+.daily__date-nav--next a::after {
+  right: 0;
+  content: '→';
+}
+
+.daily__number {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1.5rem 0.5rem;
+}
+
+.daily__number--cases-day {
+  grid-area: cases-day;
+}
+
+.daily__number .number {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.daily__number .description {
+  font-size: var(--tagline-font-size);
+}

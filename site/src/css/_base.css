@@ -1,0 +1,49 @@
+:root {
+  --pearl: #f7f7f9;
+  --faraway-sky: #8e7cc3;
+  --scandinavian-sky: #c2d6d6;
+  --black-violet: #2b2d42;
+  --yoga-flame: #f7e733;
+  --cottagecore-sunset: #ffd9da;
+  --aphrodite-aqua: #41e2ba;
+  --french-raspberry: #ba3b46;
+
+  --dashboard-bg-color: var(--pearl);
+  --box-bg-color: var(--scandinavian-sky);
+  --link-color: var(--french-raspberry);
+}
+
+html {
+  --body-font: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  --body-font-size: 1rem;
+  --body-letter-spacing: -0.004em;
+  --body-font-weight: 420;
+
+  --title-font-size: 2rem;
+  --title-font-weight: 900;
+
+  --tagline-font-size: 0.85rem;
+  --tagline-font-weight: 700;
+}
+
+body {
+  background: var(--dashboard-bg-color);
+  font-family: var(--body-font);
+  font-size: var(--body-font-size);
+  font-weight: var(--body-font-weight);
+  letter-spacing: var(--body-letter-spacing);
+  margin: 0;
+  padding: 0;
+}
+
+a:link,
+a:active,
+a:visited {
+  color: var(--link-color);
+}
+
+a:hover {
+  text-decoration: none;
+}
