@@ -6,7 +6,12 @@ pagination:
   alias: record
 permalink: "daily/{{ record.date|formatDate('YYYY-MM-DD') }}/index.html"
 ---
-{% from "daily-macros.njk" import dailyTable, totalTable, dailyTopIncidence, totalTopCases %}
+{% from "daily-macros.njk" import dailyTable, 
+                                  totalTable, 
+                                  dailyTopIncidence, 
+                                  totalTopCases, 
+                                  incidenceBarChart,
+                                  casesBarChart %}
 
 {% set prevRecord = pagination.pages[pagination.pageNumber - 1] %}
 
@@ -34,6 +39,14 @@ permalink: "daily/{{ record.date|formatDate('YYYY-MM-DD') }}/index.html"
   {{ dailyTable(record.austria, prevRecord.austria) }}
   
   {{ totalTable(record.austria) }}
+  
+  <div class="daily__chart daily__chart--incidence-osterreich">
+    {{ incidenceBarChart(pagination.pages | arraySlice(-60)) }}
+  </div>
+  
+  <div class="daily__chart daily__chart--cases-osterreich">
+    {{ casesBarChart(pagination.pages | arraySlice(-60)) }}
+  </div>
   
   <div class="daily__province-nav">
     <ul>

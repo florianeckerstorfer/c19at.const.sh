@@ -139,3 +139,43 @@
   </div>
 </div>
 {% endmacro %}
+
+{% macro incidenceBarChart(records) %}
+  {% set maxValue = records | maxIncidence %}
+  <figure>
+    <svg viewBox="0 0 280 50" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+      <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g fill="#000000">
+          {% for record in records %}
+            {% set recordHeight = (50 / maxValue) * record.austria.sevenDayIncidence %}
+            <rect x="{{ loop.index0 * 5 }}" 
+                  y="{{ 50 - recordHeight }}" 
+                  width="3" 
+                  height="{{ recordHeight }}"></rect>
+          {% endfor %}
+        </g>
+      </g>
+    </svg>
+    <figcaption>7-Tage-Inzidenz in den letzten 60 Tagen</figcaption>
+  </figure>
+{% endmacro %}
+
+{% macro casesBarChart(records) %}
+{% set maxValue = records | maxCases %}
+<figure>
+  <svg viewBox="0 0 280 50" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+      <g fill="#000000">
+        {% for record in records %}
+          {% set recordHeight = (50 / maxValue) * record.austria.casesDaily %}
+          <rect x="{{ loop.index0 * 5 }}" 
+                y="{{ 50 - recordHeight }}" 
+                width="3" 
+                height="{{ recordHeight }}"></rect>
+        {% endfor %}
+      </g>
+    </g>
+  </svg>
+  <figcaption>Neue Fälle in den letzten 60 Tagen</figcaption>
+</figure>
+{% endmacro %}

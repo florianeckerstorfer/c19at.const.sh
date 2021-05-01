@@ -4,6 +4,9 @@ const formatNumberFilter = require('./site/src/filters/format-number-filter');
 const roundFilter = require('./site/src/filters/round-filter');
 const sortByIncidenceFilter = require('./site/src/filters/sort-by-incidence-filter');
 const sortByCasesTotalFilter = require('./site/src/filters/sort-by-cases-total-filter');
+const arraySliceFilter = require('./site/src/filters/array-slice-filter');
+const maxIncidenceFilter = require('./site/src/filters/max-incidence-filter');
+const maxCasesFilter = require('./site/src/filters/max-cases-filter');
 
 module.exports = function (eleventyConfig) {
   eleventyConfig.addFilter('formatDate', formatDateFilter);
@@ -12,6 +15,9 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addFilter('round', roundFilter);
   eleventyConfig.addFilter('sortByIncidence', sortByIncidenceFilter);
   eleventyConfig.addFilter('sortByCasesTotal', sortByCasesTotalFilter);
+  eleventyConfig.addFilter('arraySlice', arraySliceFilter);
+  eleventyConfig.addFilter('maxIncidence', maxIncidenceFilter);
+  eleventyConfig.addFilter('maxCases', maxCasesFilter);
 
   eleventyConfig.addLayoutAlias('base', 'base.njk');
 
