@@ -5,129 +5,521 @@
   background: var(--dashboard-bg-color);
   grid-template-columns: repeat(2, 1fr);
   grid-template-areas:
-    'date date'
-    'nav-previous nav-next'
     'title title'
-    'cases-day cases-day';
+    'nav-previous nav-next'
+    'date date'
+    'daily-osterreich-head daily-osterreich-head'
+    'daily-osterreich daily-osterreich'
+    'total-osterreich-head total-osterreich-head'
+    'total-osterreich total-osterreich'
+    'daily-top-incidence-head daily-top-incidence-head'
+    'daily-top-incidence daily-top-incidence'
+    'total-top-cases-head total-top-cases-head'
+    'total-top-cases total-top-cases'
+    'province-nav province-nav'
+    'daily-burgenland-head daily-burgenland-head'
+    'daily-burgenland daily-burgenland'
+    'total-burgenland-head total-burgenland-head'
+    'total-burgenland total-burgenland'
+    'daily-karnten-head daily-karnten-head'
+    'daily-karnten daily-karnten'
+    'total-karnten-head total-karnten-head'
+    'total-karnten total-karnten'
+    'daily-niederosterreich-head daily-niederosterreich-head'
+    'daily-niederosterreich daily-niederosterreich'
+    'total-niederosterreich-head total-niederosterreich-head'
+    'total-niederosterreich total-niederosterreich'
+    'daily-oberosterreich-head daily-oberosterreich-head'
+    'daily-oberosterreich daily-oberosterreich'
+    'total-oberosterreich-head total-oberosterreich-head'
+    'total-oberosterreich total-oberosterreich'
+    'daily-salzburg-head daily-salzburg-head'
+    'daily-salzburg daily-salzburg'
+    'total-salzburg-head total-salzburg-head'
+    'total-salzburg total-salzburg'
+    'daily-steiermark-head daily-steiermark-head'
+    'daily-steiermark daily-steiermark'
+    'total-steiermark-head total-steiermark-head'
+    'total-steiermark total-steiermark'
+    'daily-tirol-head daily-tirol-head'
+    'daily-tirol daily-tirol'
+    'total-tirol-head total-tirol-head'
+    'total-tirol total-tirol'
+    'daily-vorarlberg-head daily-vorarlberg-head'
+    'daily-vorarlberg daily-vorarlberg'
+    'total-vorarlberg-head total-vorarlberg-head'
+    'total-vorarlberg total-vorarlberg'
+    'daily-wien-head daily-wien-head'
+    'daily-wien daily-wien'
+    'total-wien-head total-wien-head'
+    'total-wien total-wien';
 }
 
-@media screen and (min-width: 425px) {
+@media screen and (min-width: 650px) {
+  .daily {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas:
+      'title title'
+      'nav-previous nav-next'
+      'date date'
+      'daily-osterreich-head total-osterreich-head'
+      'daily-osterreich total-osterreich'
+      'province-nav province-nav'
+      'daily-top-incidence-head total-top-cases-head'
+      'daily-top-incidence total-top-cases'
+      'daily-burgenland-head total-burgenland-head'
+      'daily-burgenland total-burgenland'
+      'daily-karnten-head total-karnten-head'
+      'daily-karnten total-karnten'
+      'daily-niederosterreich-head total-niederosterreich-head'
+      'daily-niederosterreich total-niederosterreich'
+      'daily-oberosterreich-head total-oberosterreich-head'
+      'daily-oberosterreich total-oberosterreich'
+      'daily-salzburg-head total-salzburg-head'
+      'daily-salzburg total-salzburg'
+      'daily-steiermark-head total-steiermark-head'
+      'daily-steiermark total-steiermark'
+      'daily-tirol-head total-tirol-head'
+      'daily-tirol total-tirol'
+      'daily-vorarlberg-head total-vorarlberg-head'
+      'daily-vorarlberg total-vorarlberg'
+      'daily-wien-head total-wien-head'
+      'daily-wien total-wien';
+  }
+}
+
+@media screen and (min-width: 950px) {
   .daily {
     grid-template-columns: repeat(3, 1fr);
     grid-template-areas:
-      'nav-previous date nav-next'
-      'title title cases-day';
+      'nav-previous title nav-next'
+      'date daily-osterreich-head total-osterreich-head'
+      '. daily-osterreich total-osterreich'
+      '. province-nav province-nav'
+      '. daily-top-incidence-head total-top-cases-head'
+      '. daily-top-incidence total-top-cases'
+      '. daily-burgenland-head total-burgenland-head'
+      '. daily-burgenland total-burgenland'
+      '. daily-karnten-head total-karnten-head'
+      '. daily-karnten total-karnten'
+      '. daily-niederosterreich-head total-niederosterreich-head'
+      '. daily-niederosterreich total-niederosterreich'
+      '. daily-oberosterreich-head total-oberosterreich-head'
+      '. daily-oberosterreich total-oberosterreich'
+      '. daily-salzburg-head total-salzburg-head'
+      '. daily-salzburg total-salzburg'
+      '. daily-steiermark-head total-steiermark-head'
+      '. daily-steiermark total-steiermark'
+      '. daily-tirol-head total-tirol-head'
+      '. daily-tirol total-tirol'
+      '. daily-vorarlberg-head total-vorarlberg-head'
+      '. daily-vorarlberg total-vorarlberg'
+      '. daily-wien-head total-wien-head'
+      '. daily-wien total-wien';
   }
 }
 
 .daily > * {
-  background: var(--box-bg-color);
-  border-radius: 1.5rem;
 }
 
 .daily__title {
-  background: var(--yoga-flame);
-  color: var(--black-violet);
+  background: var(--dark);
+  color: var(--dark-contrast);
   grid-area: title;
-  padding: 1rem 0.5rem;
-  text-align: center;
+  padding: 0.25rem;
 }
 
 .daily__title h1 {
   font-size: var(--title-font-size);
   font-weight: var(--title-font-weight);
-  margin: 0;
-}
-
-.daily__title .tagline {
-  font-size: var(--tagline-font-size);
-  font-weight: var(--tagline-font-weight);
-  text-transform: uppercase;
-}
-
-.daily__date {
-  background: var(--faraway-sky);
-  color: var(--pearl);
-  display: flex;
-  flex-direction: column;
-  grid-area: date;
-  justify-content: flex-end;
-  align-items: center;
-  padding: 1.5rem 0.5rem;
-}
-
-.daily__date .date {
-  font-size: 1.5rem;
-  font-weight: 700;
+  margin: 0 0.5rem 0 0;
   text-align: center;
 }
 
-.daily__date-nav {
-  padding: 2.25rem 1rem 1rem;
+.daily__title h1 span {
+  font-style: italic;
+}
+
+.daily__date {
+  background: var(--dark);
+  color: var(--dark-contrast);
   display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
+  flex-direction: row;
+  grid-area: date;
+  padding: 0.25rem;
+  justify-content: space-between;
+}
+
+.daily__date .date {
+  font-weight: bold;
+}
+
+.daily__date-nav {
+  padding: 0.25rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .daily__date-nav .date {
-  font-size: var(--tagline-font-size);
-  font-weight: var(--tagline-font-weight);
+  font-style: oblique;
+}
+
+.daily__date-nav--previous .date {
+  order: 2;
+  margin-left: 1rem;
+}
+
+.daily__date-nav .date {
+  order: 1;
+  margin-right: 1rem;
 }
 
 .daily__date-nav--previous {
   grid-area: nav-previous;
-  align-items: flex-start;
+  justify-content: flex-start;
 }
 
 .daily__date-nav--next {
   grid-area: nav-next;
-  align-items: flex-end;
+  justify-content: flex-end;
 }
 
 .daily__date-nav a {
-  display: block;
-  font-size: 1.25rem;
-  font-weight: 700;
+  font-weight: bold;
   position: relative;
 }
 
+.daily__date-nav--previous a {
+  order: 1;
+  padding-left: 1.35rem;
+}
+
 .daily__date-nav--next a {
+  order: 2;
+  padding-right: 1.35rem;
   text-align: right;
 }
 
 .daily__date-nav--previous a::before,
 .daily__date-nav--next a::after {
   position: absolute;
-  top: -1.25rem;
 }
 
 .daily__date-nav--previous a::before {
   left: 0;
-  content: '←';
+  content: '<-';
 }
 
 .daily__date-nav--next a::after {
   right: 0;
-  content: '→';
+  content: '->';
 }
 
 .daily__number {
   align-items: center;
   display: flex;
+  flex-direction: row;
+  padding: 0.25rem;
+  justify-content: space-between;
+}
+
+.daily__table-head {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 0.25rem;
+}
+
+.daily__table-head--daily-osterreich {
+  grid-area: daily-osterreich-head;
+}
+
+.daily__table-head--daily-wien {
+  grid-area: daily-wien-head;
+}
+
+.daily__table-head--daily-vorarlberg {
+  grid-area: daily-vorarlberg-head;
+}
+
+.daily__table-head--daily-tirol {
+  grid-area: daily-tirol-head;
+}
+
+.daily__table-head--daily-salzburg {
+  grid-area: daily-salzburg-head;
+}
+
+.daily__table-head--daily-oberosterreich {
+  grid-area: daily-oberosterreich-head;
+}
+
+.daily__table-head--daily-niederosterreich {
+  grid-area: daily-niederosterreich-head;
+}
+
+.daily__table-head--daily-karnten {
+  grid-area: daily-karnten-head;
+}
+
+.daily__table-head--daily-burgenland {
+  grid-area: daily-burgenland-head;
+}
+
+.daily__table-head--daily-steiermark {
+  grid-area: daily-steiermark-head;
+}
+
+.daily__table-head--total-osterreich {
+  grid-area: total-osterreich-head;
+}
+
+.daily__table-head--total-burgenland {
+  grid-area: total-burgenland-head;
+}
+
+.daily__table-head--total-karnten {
+  grid-area: total-karnten-head;
+}
+
+.daily__table-head--total-niederosterreich {
+  grid-area: total-niederosterreich-head;
+}
+
+.daily__table-head--total-oberosterreich {
+  grid-area: total-oberosterreich-head;
+}
+
+.daily__table-head--total-salzburg {
+  grid-area: total-salzburg-head;
+}
+
+.daily__table-head--total-steiermark {
+  grid-area: total-steiermark-head;
+}
+
+.daily__table-head--total-tirol {
+  grid-area: total-tirol-head;
+}
+
+.daily__table-head--total-vorarlberg {
+  grid-area: total-vorarlberg-head;
+}
+
+.daily__table-head--total-wien {
+  grid-area: total-wien-head;
+}
+
+.daily__table-head--daily-top-incidence {
+  grid-area: daily-top-incidence-head;
+}
+
+.daily__table-head--total-top-cases {
+  grid-area: total-top-cases-head;
+}
+
+.daily__table-head h2 {
+  font-size: var(--title-font-size);
+  margin: 0;
+}
+
+.daily__table-head h2 span {
+  font-style: italic;
+}
+
+.daily__table-head .tagline {
+  font-size: 0.85rem;
+  flex-basis: 100%;
+}
+
+.daily__table-head .to-top {
+  font-size: 0.75rem;
+  padding-right: 0.75rem;
+  position: relative;
+}
+
+.daily__table-head .to-top::after {
+  content: '↑';
+  margin-left: 0.25rem;
+  text-decoration: none;
+  position: absolute;
+  right: 0;
+}
+
+.daily__table {
+  padding: 0.25rem;
+  display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: 1.5rem 0.5rem;
 }
 
-.daily__number--cases-day {
-  grid-area: cases-day;
+.daily__table--daily-osterreich {
+  grid-area: daily-osterreich;
 }
 
-.daily__number .number {
-  font-size: 2rem;
-  font-weight: 700;
+.daily__table--daily-burgenland {
+  grid-area: daily-burgenland;
 }
 
-.daily__number .description {
-  font-size: var(--tagline-font-size);
+.daily__table--daily-karnten {
+  grid-area: daily-karnten;
+}
+
+.daily__table--daily-niederosterreich {
+  grid-area: daily-niederosterreich;
+}
+
+.daily__table--daily-oberosterreich {
+  grid-area: daily-oberosterreich;
+}
+
+.daily__table--daily-salzburg {
+  grid-area: daily-salzburg;
+}
+
+.daily__table--daily-steiermark {
+  grid-area: daily-steiermark;
+}
+
+.daily__table--daily-tirol {
+  grid-area: daily-tirol;
+}
+
+.daily__table--daily-vorarlberg {
+  grid-area: daily-vorarlberg;
+}
+
+.daily__table--daily-wien {
+  grid-area: daily-wien;
+}
+
+.daily__table--total-osterreich {
+  grid-area: total-osterreich;
+}
+
+.daily__table--total-burgenland {
+  grid-area: total-burgenland;
+}
+
+.daily__table--total-karnten {
+  grid-area: total-karnten;
+}
+
+.daily__table--total-niederosterreich {
+  grid-area: total-niederosterreich;
+}
+
+.daily__table--total-oberosterreich {
+  grid-area: total-oberosterreich;
+}
+
+.daily__table--total-salzburg {
+  grid-area: total-salzburg;
+}
+
+.daily__table--total-steiermark {
+  grid-area: total-steiermark;
+}
+
+.daily__table--total-tirol {
+  grid-area: total-tirol;
+}
+
+.daily__table--total-vorarlberg {
+  grid-area: total-vorarlberg;
+}
+
+.daily__table--total-wien {
+  grid-area: total-wien;
+}
+
+.daily__table--daily-top-incidence {
+  grid-area: daily-top-incidence;
+}
+
+.daily__table--total-top-cases {
+  grid-area: total-top-cases;
+}
+
+.daily__table-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.daily_table-row--placeholder::after {
+  display: block;
+  opacity: 0;
+  content: '.';
+}
+
+.daily__table-row .label {
+  flex-grow: 0;
+  margin-right: 0.5rem;
+}
+
+.daily__table-row .spacer {
+  background: var(--dot-bg) repeat-x;
+  max-width: 100%;
+  flex-grow: 1;
+  height: 1.2em;
+}
+
+.daily__table-row .number {
+  flex-grow: 0;
+  font-weight: bold;
+  margin-left: 0.5rem;
+}
+
+.change-arrow {
+  display: inline-block;
+}
+
+.change-arrow.good {
+  color: var(--good);
+}
+
+.change-arrow.bad {
+  color: var(--bad);
+}
+
+.change-arrow.neutral {
+  color: var(--neutral);
+}
+
+.change-arrow.up {
+  transform: rotate(-45deg);
+}
+
+.change-arrow.down {
+  transform: rotate(45deg);
+}
+
+.daily__province-nav {
+  grid-area: province-nav;
+  padding: 0.25rem;
+}
+
+.daily__province-nav ul {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.daily__province-nav ul li {
+  margin: 0 2rem 0.5rem 0;
+}
+
+.daily__province-nav ul li:last-child {
+  margin-right: 0;
+}
+
+.recorddump {
+  overflow-x: scroll;
 }

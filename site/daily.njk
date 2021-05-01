@@ -3,18 +3,20 @@ layout: base
 pagination:
   data: daily
   size: 1
-permalink: "daily/{{ pagination.items[0].date|formatDate('YYYY-MM-DD') }}/index.html"
+  alias: record
+permalink: "daily/{{ record.date|formatDate('YYYY-MM-DD') }}/index.html"
 ---
-{% set record = pagination.items[0] %}
+{% from "daily-macros.njk" import dailyTable, totalTable, dailyTopIncidence, totalTopCases %}
 
-<div class="daily">
+{% set prevRecord = pagination.pages[pagination.pageNumber - 1] %}
+
+<div id="daily" class="daily">
   <div class="daily__title">
-    <h1>COVID19 in Austria</h1>
-    <div class="tagline">Dashboard</div>
+    <h1><span>Covid19</span> in Österreich</h1>
   </div>
   <div class="daily__date">
-    <div class="weekday">{{ record.date | formatDate('dddd') }}</div>
-    <div class="date">{{ record.date | formatDate('MMMM DD, YYYY') }}</div >
+    <div class="weekday">{{ record.date | formatDate('dddd') }},</div>
+    <div class="date">{{ record.date | formatDate('MMMM DD, YYYY') }}</div>
   </div>
   {%- if pagination.pageNumber > 0 %}
   <nav class="daily__date-nav daily__date-nav--previous">
@@ -28,13 +30,30 @@ permalink: "daily/{{ pagination.items[0].date|formatDate('YYYY-MM-DD') }}/index.
       <div class="date">{{ pagination.page.next.date | formatDate('MMM DD') }}</div>
   </nav>
   {% endif -%}
-  <div class="daily__number daily__number--cases-day">
-    <div class="number">{{ record.austria.casesDaily }}</div>
-    <div class="description">New cases</div>
+  
+  {{ dailyTable(record.austria, prevRecord.austria) }}
+  
+  {{ totalTable(record.austria) }}
+  
+  <div class="daily__province-nav">
+    <ul>
+      {% for province in record.provinces %}
+        <li><a href="#province-daily-{{ province.province | slug }}">{{ province.province }}</a></li>
+      {% endfor %}
+    </ul>
   </div>
+  
+  {{ dailyTopIncidence(record) }}
+  {{ totalTopCases(record) }}
+  
+  {% for province in record.provinces %}
+    {{ dailyTable(province, prevRecord.provinces[loop.index0]) }}
+    {{ totalTable(province, prevRecord.provinces[loop.index0]) }}
+  {% endfor %}
+  
 </div>
 
-<pre>
+<pre class="recorddump">
 {{ record | formatJSON }}
 </pre>
 

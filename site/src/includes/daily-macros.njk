@@ -1,0 +1,141 @@
+{% macro renderChangeIcon(number1, number2, downIsGood = false) %}
+<span class="change-arrow
+  {%- if number1 === number2 %} eql
+  {%- elif number1 > number2%} up
+  {%- else %} down{% endif -%}
+  {%- if (downIsGood and number1 < number2) or (not downIsGood and number1 > number2) %} good
+  {%- elif number1 === number2 %} neutral
+  {%- else %} bad{% endif -%}">-></span>
+{% endmacro %}
+
+{% macro dailyTable(record, prevRecord) %}
+<div id="province-daily-{{ record.province | slug }}" 
+     class="daily__table-head daily__table-head--daily-{{ record.province | slug }}">
+  <h2>Tag <span>in {{ record.province }}</span></h2>
+  {% if record.provinceId !== 10 %}
+  <a href="#daily" class="to-top">Nach oben</a>
+  {% endif %}
+</div>
+<div class="daily__table daily__table--daily-{{ record.province | slug }}">
+  <div class="daily__table-row">
+    <div class="label">7-Tage-Inzidenz</div>
+    <div class="spacer"></div>
+    <div class="number">{{ record.sevenDayIncidence | round | formatNumber }}</div>
+    {{ renderChangeIcon(record.sevenDayIncidence, prevRecord.sevenDayIncidence, true) }}
+  </div>
+  <div class="daily__table-row">
+    <div class="label">Fälle</div>
+    <div class="spacer"></div>
+    <div class="number">{{ record.casesDaily | formatNumber }}</div>
+    <div class="change">
+      {{ renderChangeIcon(record.casesDaily, prevRecord.casesDaily, true) }}
+    </div>
+  </div>
+  <div class="daily__table-row">
+    <div class="label">Todesfälle</div>
+    <div class="spacer"></div>
+    <div class="number">{{ record.deathsDaily | formatNumber }}</div>
+    {{ renderChangeIcon(record.deathsDaily, prevRecord.deathsDaily, true) }}
+  </div>
+  <div class="daily__table-row">
+    <div class="label">Geheilt</div>
+    <div class="spacer"></div>
+    <div class="number">{{ record.curedDaily | formatNumber }}</div>
+    {{ renderChangeIcon(record.curedDaily, prevRecord.curedDaily, false) }}
+  </div>
+  <div class="daily__table-row">
+    <div class="label">Fälle / 100k EW</div>
+    <div class="spacer"></div>
+    <div class="number">{{ record.casesDailyPerInhabitants | round | formatNumber }}</div>
+    {{ renderChangeIcon(record.casesDailyPerInhabitants, prevRecord.casesDailyPerInhabitants, true) }}
+  </div>
+  <div class="daily__table-row">
+    <div class="label">Todesfälle / 100k EW</div>
+    <div class="spacer"></div>
+    <div class="number">{{ record.deathsDailyPerInhabitants | round | formatNumber }}</div>
+    {{ renderChangeIcon(record.deathsDailyPerInhabitants, prevRecord.deathsDailyPerInhabitants, true) }}
+  </div>
+</div>
+{% endmacro %}
+
+{% macro totalTable(record) %}
+<div id="province-total-{{ record.province | slug }}" 
+     class="daily__table-head daily__table-head--total-{{ record.province | slug }}">
+  <h2>Gesamtzahlen <span>für {{ record.province }}</span></h2>
+</div>
+<div class="daily__table daily__table--total-{{ record.province | slug }}">
+  <div class="daily_table-row daily_table-row--placeholder"></div>
+  <div class="daily__table-row">
+    <div class="label">Fälle</div>
+    <div class="spacer"></div>
+    <div class="number">{{ record.casesTotal | formatNumber }}</div>
+  </div>
+  <div class="daily__table-row">
+    <div class="label">Todesfälle</div>
+    <div class="spacer"></div>
+    <div class="number">{{ record.deathsTotal | formatNumber }}</div>
+  </div>
+  <div class="daily__table-row">
+    <div class="label">Geheilt</div>
+    <div class="spacer"></div>
+    <div class="number">{{ record.curedTotal | formatNumber }}</div>
+  </div>
+  <div class="daily__table-row">
+    <div class="label">Fälle / 100k EW</div>
+    <div class="spacer"></div>
+    <div class="number">{{ record.casesTotalPerInhabitants | round | formatNumber }}</div>
+  </div>
+  <div class="daily__table-row">
+    <div class="label">Todesfälle / 100k EW</div>
+    <div class="spacer"></div>
+    <div class="number">{{ record.deathsTotalPerInhabitants | round | formatNumber }}</div>
+  </div>
+</div>
+{% endmacro %}
+
+{% macro dailyTopIncidence(record) %}
+<div id="daily-top-incidence" 
+   class="daily__table-head daily__table-head--daily-top-incidence">
+   <h2>7-Tage-Inzidenz <span>im Östereichvergleich</span></h2>
+</div>
+<div class="daily__table daily__table--daily-top-incidence">
+  {% for province in record.provinces | sortByIncidence %}
+    <div class="daily__table-row">
+      <div class="label">{{ province.province }}</div>
+      <div class="spacer"></div>
+      <div class="number">
+        {{ province.sevenDayIncidence | round | formatNumber }}
+      </div>
+    </div>
+  {% endfor %}
+  <div class="daily__table-row">
+    <div class="label">==> Österreich</div>
+    <div class="spacer"></div>
+    <div class="number">{{ record.austria.sevenDayIncidence | round | formatNumber }}</div>
+  </div>
+</div>
+{% endmacro %}
+
+{% macro totalTopCases(record) %}
+<div id="total-top-cases" 
+   class="daily__table-head daily__table-head--total-top-cases">
+   <h2>Gesamtzahlen <span>im Östereichvergleich</span></h2>
+   <div class="tagline">Fälle pro 100.000 Einwohner</div>
+</div>
+<div class="daily__table daily__table--total-top-cases">
+  {% for province in record.provinces | sortByCasesTotal %}
+    <div class="daily__table-row">
+      <div class="label">{{ province.province }}</div>
+      <div class="spacer"></div>
+      <div class="number">
+        {{ province.casesTotalPerInhabitants | round | formatNumber }}
+      </div>
+    </div>
+  {% endfor %}
+  <div class="daily__table-row">
+    <div class="label">==> Österreich</div>
+    <div class="spacer"></div>
+    <div class="number">{{ record.austria.casesTotalPerInhabitants | round | formatNumber }}</div>
+  </div>
+</div>
+{% endmacro %}

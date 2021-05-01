@@ -30,6 +30,17 @@ module.exports = function (caseTimeline) {
       curedDaily: parseInt(record.AnzahlGeheiltTaeglich, 10),
       curedTotal: parseInt(record.AnzahlGeheiltSum, 10),
     }))
+    .map((record) => ({
+      ...record,
+      casesDailyPerInhabitants:
+        record.casesDaily / (record.inhabitants / 100000),
+      deathsDailyPerInhabitants:
+        record.deathsDaily / (record.inhabitants / 100000),
+      casesTotalPerInhabitants:
+        record.casesTotal / (record.inhabitants / 100000),
+      deathsTotalPerInhabitants:
+        record.deathsTotal / (record.inhabitants / 100000),
+    }))
     .groupBy((record) => record.dateYYYYMMDD)
     .map(_.value)
     .map((record) => ({
