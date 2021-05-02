@@ -2,4 +2,6 @@
 layout: base
 title: COVID19 in Austria
 ---
-hello world
+{% set currentPermalink = '/daily/' + daily[daily.length -1].date | formatDate('YYYY-MM-DD') + '/' %}
+<meta http-equiv="refresh" content="0; url={{ currentPermalink }}">
+<a href="{{ currentPermalink }}">See newest data</a>
