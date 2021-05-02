@@ -49,11 +49,11 @@ permalink: "daily/{{ record.date|formatDate('YYYY-MM-DD') }}/index.html"
   {{ totalTable(record.austria) }}
   
   <div class="daily__chart daily__chart--incidence-osterreich">
-    {{ incidenceBarChart(pagination.pages | arraySlice(-60)) }}
+    {{ incidenceBarChart(pagination.pages | recordsUntil(record.date) | arraySlice(-60)) }}
   </div>
   
   <div class="daily__chart daily__chart--cases-osterreich">
-    {{ casesBarChart(pagination.pages | arraySlice(-60)) }}
+    {{ casesBarChart(pagination.pages | recordsUntil(record.date) | arraySlice(-60)) }}
   </div>
   
   <div class="daily__province-nav">
