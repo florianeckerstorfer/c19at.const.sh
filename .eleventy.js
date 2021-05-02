@@ -7,6 +7,8 @@ const sortByCasesTotalFilter = require('./site/src/filters/sort-by-cases-total-f
 const arraySliceFilter = require('./site/src/filters/array-slice-filter');
 const maxIncidenceFilter = require('./site/src/filters/max-incidence-filter');
 const maxCasesFilter = require('./site/src/filters/max-cases-filter');
+const translateDateFilter = require('./site/src/filters/translate-date-filter');
+const daysSinceFirstCaseFilter = require('./site/src/filters/days-since-first-case-filter');
 
 module.exports = function (eleventyConfig) {
   eleventyConfig.addFilter('formatDate', formatDateFilter);
@@ -18,6 +20,8 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addFilter('arraySlice', arraySliceFilter);
   eleventyConfig.addFilter('maxIncidence', maxIncidenceFilter);
   eleventyConfig.addFilter('maxCases', maxCasesFilter);
+  eleventyConfig.addFilter('translateDate', translateDateFilter);
+  eleventyConfig.addFilter('daysSinceFirstCase', daysSinceFirstCaseFilter);
 
   eleventyConfig.addLayoutAlias('base', 'base.njk');
 

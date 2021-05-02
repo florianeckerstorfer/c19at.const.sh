@@ -20,21 +20,29 @@ permalink: "daily/{{ record.date|formatDate('YYYY-MM-DD') }}/index.html"
     <h1><span>Covid19</span> in Österreich</h1>
   </div>
   <div class="daily__date">
-    <div class="weekday">{{ record.date | formatDate('dddd') }},</div>
-    <div class="date">{{ record.date | formatDate('MMMM DD, YYYY') }}</div>
+    <div class="weekday">{{ record.date | formatDate('dddd') | translateDate }},</div>
+    <div class="date">{{ record.date | formatDate('MMMM DD, YYYY') | translateDate }}</div>
   </div>
   {%- if pagination.pageNumber > 0 %}
   <nav class="daily__date-nav daily__date-nav--previous">
       <a href="{{ pagination.href.previous }}">Previous day</a>
-      <div class="date">{{ pagination.page.previous.date | formatDate('MMM DD') }}</div>
+      <div class="date">{{ pagination.page.previous.date | formatDate('MMM DD') | translateDate }}</div>
   </nav>
   {% endif -%}
   {%- if pagination.page.next %}
   <nav class="daily__date-nav daily__date-nav--next">
       <a href="{{ pagination.href.next }}">Next day</a>
-      <div class="date">{{ pagination.page.next.date | formatDate('MMM DD') }}</div>
+      <div class="date">{{ pagination.page.next.date | formatDate('MMM DD') | translateDate }}</div>
   </nav>
   {% endif -%}
+  
+  <div class="daily__update">
+    <em>{{ pagination.pages | daysSinceFirstCase(record.date) }} Tage</em> seit dem ersten Fall. 
+    Neueste Daten vom <em>{{ pagination.pages[pagination.pages.length - 1].date | formatDate('DD. MMMM YYYY') | translateDate }}</em>.
+    Zuletzt aktualisiert am 
+    <em>{{ currentDate | formatDate('DD. MMMM YYYY') | translateDate }}</em> um 
+    <em>{{ currentDate | formatDate('HH:mm') }}</em>. 
+  </div>
   
   {{ dailyTable(record.austria, prevRecord.austria) }}
   

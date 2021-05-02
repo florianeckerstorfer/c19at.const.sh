@@ -8,6 +8,7 @@
     'title title'
     'nav-previous nav-next'
     'date date'
+    'update update'
     'daily-osterreich-head daily-osterreich-head'
     'daily-osterreich daily-osterreich'
     'incidence-chart-osterreich incidence-chart-osterreich'
@@ -64,6 +65,7 @@
       'title title'
       'nav-previous nav-next'
       'date date'
+      'update update'
       'daily-osterreich-head total-osterreich-head'
       'daily-osterreich total-osterreich'
       'incidence-chart-osterreich cases-chart-osterreich'
@@ -97,7 +99,7 @@
     grid-template-areas:
       'nav-previous title nav-next'
       'date daily-osterreich-head total-osterreich-head'
-      '. daily-osterreich total-osterreich'
+      'update daily-osterreich total-osterreich'
       '. incidence-chart-osterreich cases-chart-osterreich'
       '. province-nav province-nav'
       '. daily-top-incidence-head total-top-cases-head'
@@ -220,12 +222,10 @@
   content: '->';
 }
 
-.daily__number {
-  align-items: center;
-  display: flex;
-  flex-direction: row;
+.daily__update {
+  font-size: 0.85rem;
+  grid-area: update;
   padding: 0.25rem;
-  justify-content: space-between;
 }
 
 .daily__table-head {
