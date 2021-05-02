@@ -1,11 +1,9 @@
 const _ = require('lodash');
 const dayjs = require('dayjs');
 const customParseFormat = require('dayjs/plugin/customParseFormat');
+const { isAustria, isProvince } = require('../data-helper');
 
 dayjs.extend(customParseFormat);
-
-const isAustria = (province) => province.provinceId === 10;
-const isProvince = (province) => province.provinceId !== 10;
 
 module.exports = function (caseTimeline) {
   return _.chain(caseTimeline)
