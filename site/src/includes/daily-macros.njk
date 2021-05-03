@@ -143,17 +143,18 @@
 {% macro incidenceBarChart(records) %}
   {% set maxValue = records | maxIncidence %}
   <figure>
-    <svg viewBox="0 0 280 50" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <svg viewBox="0 0 300 50" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
       <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g fill="#000000">
-          {% for record in records %}
-            {% set recordHeight = (50 / maxValue) * record.austria.sevenDayIncidence %}
-            <rect x="{{ loop.index0 * 5 }}" 
-                  y="{{ 50 - recordHeight }}" 
-                  width="3" 
-                  height="{{ recordHeight }}"></rect>
-          {% endfor %}
-        </g>
+      {% set height100 = (50 / maxValue) * 100 %}
+      <rect x="0" y="{{ 50 - height100 }}" width="300" height="1" fill="#999999"></rect>
+        {% for record in records %}
+          {% set recordHeight = (50 / maxValue) * record.austria.sevenDayIncidence %}
+          <rect x="{{ loop.index0 * 4.84 + 6 }}" 
+                y="{{ 50 - recordHeight }}" 
+                width="3" 
+                height="{{ recordHeight }}"
+                fill="{{ "#ba3b46" if loop.last else "#000000" }}"></rect>
+        {% endfor %}
       </g>
     </svg>
     <figcaption>7-Tage-Inzidenz in den letzten 60 Tagen</figcaption>
@@ -163,17 +164,16 @@
 {% macro casesBarChart(records) %}
 {% set maxValue = records | maxCases %}
 <figure>
-  <svg viewBox="0 0 280 50" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <svg viewBox="0 0 300 50" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-      <g fill="#000000">
-        {% for record in records %}
-          {% set recordHeight = (50 / maxValue) * record.austria.casesDaily %}
-          <rect x="{{ loop.index0 * 5 }}" 
-                y="{{ 50 - recordHeight }}" 
-                width="3" 
-                height="{{ recordHeight }}"></rect>
-        {% endfor %}
-      </g>
+      {% for record in records %}
+        {% set recordHeight = (50 / maxValue) * record.austria.casesDaily %}
+        <rect x="{{ loop.index0 * 5.04 }}" 
+              y="{{ 50 - recordHeight }}" 
+              width="3" 
+              height="{{ recordHeight }}"
+              fill="{{ "#ba3b46" if loop.last else "#000000" }}"></rect>
+      {% endfor %}
     </g>
   </svg>
   <figcaption>Neue Fälle in den letzten 60 Tagen</figcaption>
