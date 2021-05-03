@@ -13,6 +13,8 @@
     'daily-osterreich daily-osterreich'
     'incidence-chart-osterreich incidence-chart-osterreich'
     'cases-chart-osterreich cases-chart-osterreich'
+    'daily-vacc-osterreich-head daily-vacc-osterreich-head'
+    'daily-vacc-osterreich daily-vacc-osterreich'
     'total-osterreich-head total-osterreich-head'
     'total-osterreich total-osterreich'
     'daily-top-incidence-head daily-top-incidence-head'
@@ -69,6 +71,8 @@
       'daily-osterreich-head total-osterreich-head'
       'daily-osterreich total-osterreich'
       'incidence-chart-osterreich cases-chart-osterreich'
+      'daily-vacc-osterreich-head .'
+      'daily-vacc-osterreich .'
       'province-nav province-nav'
       'daily-top-incidence-head total-top-cases-head'
       'daily-top-incidence total-top-cases'
@@ -101,6 +105,8 @@
       'date daily-osterreich-head total-osterreich-head'
       'update daily-osterreich total-osterreich'
       '. incidence-chart-osterreich cases-chart-osterreich'
+      '. daily-vacc-osterreich-head .'
+      '. daily-vacc-osterreich .'
       '. province-nav province-nav'
       '. daily-top-incidence-head total-top-cases-head'
       '. daily-top-incidence total-top-cases'
@@ -323,6 +329,14 @@
 
 .daily__table-head--total-top-cases {
   grid-area: total-top-cases-head;
+}
+
+.daily__table-head--daily-vacc-osterreich {
+  grid-area: daily-vacc-osterreich-head;
+}
+
+.daily__table--daily-vacc-osterreich {
+  grid-area: daily-vacc-osterreich;
 }
 
 .daily__table-head h2 {

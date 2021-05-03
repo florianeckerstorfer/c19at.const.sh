@@ -10,6 +10,7 @@ permalink: "daily/{{ record.date|formatDate('YYYY-MM-DD') }}/index.html"
                                   totalTable, 
                                   dailyTopIncidence, 
                                   totalTopCases, 
+                                  dailyVaccinationTable,
                                   incidenceBarChart,
                                   casesBarChart %}
 
@@ -55,6 +56,10 @@ permalink: "daily/{{ record.date|formatDate('YYYY-MM-DD') }}/index.html"
   <div class="daily__chart daily__chart--cases-osterreich">
     {{ casesBarChart(pagination.pages | recordsUntil(record.date) | arraySlice(-60)) }}
   </div>
+  
+  {% if record.vaccinationsAustria %}
+    {{ dailyVaccinationTable(record.vaccinationsAustria, prevRecord.vaccinationsAustria) }}
+  {% endif %}
   
   <div class="daily__province-nav">
     <ul>

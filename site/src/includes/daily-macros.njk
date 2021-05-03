@@ -140,6 +140,36 @@
 </div>
 {% endmacro %}
 
+{% macro dailyVaccinationTable(record, prevRecord) %}
+<div id="province-daily-vacc-{{ record.province | slug }}" 
+   class="daily__table-head daily__table-head--daily-vacc-{{ record.province | slug }}">
+  <h2>Impfungen <span>in {{ record.province }}</span></h2>
+  {% if record.provinceId !== 10 %}
+  <a href="#daily" class="to-top">Nach oben</a>
+  {% endif %}
+</div>
+<div class="daily__table daily__table--daily-vacc-{{ record.province | slug }}">
+  <div class="daily__table-row">
+    <div class="label">Eingetragene Impfungen</div>
+    <div class="spacer"></div>
+    <div class="number">{{ record.dailyRegisteredVaccinations | formatNumber }}</div>
+    {{ renderChangeIcon(record.dailyRegisteredVaccinations, prevRecord.dailyRegisteredVaccinations, false) }}
+  </div>
+  <div class="daily__table-row">
+    <div class="label">Impfungen 1. Dosis</div>
+    <div class="spacer"></div>
+    <div class="number">{{ record.dailyPartlyVaccinated | formatNumber }}</div>
+    {{ renderChangeIcon(record.dailyPartlyVaccinated, prevRecord.dailyPartlyVaccinated, false) }}
+  </div>
+  <div class="daily__table-row">
+    <div class="label">Impfungen 2. Dosis</div>
+    <div class="spacer"></div>
+    <div class="number">{{ record.dailyFullyVaccinated | formatNumber }}</div>
+    {{ renderChangeIcon(record.dailyFullyVaccinated, prevRecord.dailyFullyVaccinated, false) }}
+  </div>
+</div>
+{% endmacro %}
+
 {% macro incidenceBarChart(records) %}
   {% set maxValue = records | maxIncidence %}
   <figure>

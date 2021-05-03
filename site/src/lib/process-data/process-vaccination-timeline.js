@@ -94,5 +94,24 @@ module.exports = function (vaccinationTimeline) {
       registeredJanssen: parseInt(record.EingetrageneImpfungenJanssen, 10),
     }))
     .groupBy((record) => record.dateYYYYMMDD)
+    .flatMap((dailyRecord, index, dailyRecords) => {
+      return dailyRecord.map((record) => {
+        const prevDate = record.date.subtract(1, 'day').format('YYYYMMDD');
+        const prevRecords = dailyRecords[prevDate] || [];
+        const prevRecord =
+          prevRecords.find((r) => r.provinceId === record.provinceId) || {};
+        const prevVaccinations = prevRecord.registeredVaccinations || 0;
+        const prevPartlyVaccinated = prevRecord.partlyVaccinated || 0;
+        const prevfullyVaccinated = prevRecord.fullyVaccinated || 0;
+        return {
+          ...record,
+          dailyRegisteredVaccinations:
+            record.registeredVaccinations - prevVaccinations,
+          dailyPartlyVaccinated: record.partlyVaccinated - prevPartlyVaccinated,
+          dailyFullyVaccinated: record.fullyVaccinated - prevfullyVaccinated,
+        };
+      });
+    })
+    .groupBy((record) => record.dateYYYYMMDD)
     .value();
 };
