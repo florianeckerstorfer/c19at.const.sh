@@ -15,6 +15,7 @@
   {% if record.provinceId !== 10 %}
   <a href="#daily" class="to-top">Nach oben</a>
   {% endif %}
+  <div class="tagline">Zahlen für {{ record.date | formatDate('DD. MMMM') | translateDate }}</div>
 </div>
 <div class="daily__table daily__table--daily-{{ record.province | slug }}">
   <div class="daily__table-row">
@@ -58,10 +59,11 @@
 </div>
 {% endmacro %}
 
-{% macro totalTable(record) %}
+{% macro totalTable(record, firstRecord) %}
 <div id="province-total-{{ record.province | slug }}" 
      class="daily__table-head daily__table-head--total-{{ record.province | slug }}">
   <h2>Gesamtzahlen <span>für {{ record.province }}</span></h2>
+  <div class="tagline">Seit {{ firstRecord.date | formatDate('DD.MM.YYYY') }}</div>
 </div>
 <div class="daily__table daily__table--total-{{ record.province | slug }}">
   <div class="daily_table-row daily_table-row--placeholder"></div>
@@ -97,6 +99,7 @@
 <div id="daily-top-incidence" 
    class="daily__table-head daily__table-head--daily-top-incidence">
    <h2>7-Tage-Inzidenz <span>im Östereichvergleich</span></h2>
+   <div class="tagline">Zahlen für {{ record.date | formatDate('DD. MMMM') | translateDate }}</div>
 </div>
 <div class="daily__table daily__table--daily-top-incidence">
   {% for province in record.provinces | sortByIncidence %}
@@ -116,11 +119,11 @@
 </div>
 {% endmacro %}
 
-{% macro totalTopCases(record) %}
+{% macro totalTopCases(record, firstRecord) %}
 <div id="total-top-cases" 
    class="daily__table-head daily__table-head--total-top-cases">
    <h2>Gesamtzahlen <span>im Östereichvergleich</span></h2>
-   <div class="tagline">Fälle pro 100.000 Einwohner</div>
+   <div class="tagline">Fälle pro 100.000 Einwohner seit {{ record.date | formatDate('DD. MMMM') | translateDate }}</div>
 </div>
 <div class="daily__table daily__table--total-top-cases">
   {% for province in record.provinces | sortByCasesTotal %}
@@ -147,6 +150,7 @@
   {% if record.provinceId !== 10 %}
   <a href="#daily" class="to-top">Nach oben</a>
   {% endif %}
+  <div class="tagline">Zahlen für {{ record.date | formatDate('DD. MMMM') | translateDate }}</div>
 </div>
 <div class="daily__table daily__table--daily-vacc-{{ record.province | slug }}">
   <div class="daily__table-row">
@@ -166,6 +170,34 @@
     <div class="spacer"></div>
     <div class="number">{{ record.dailyFullyVaccinated | formatNumber }}</div>
     {{ renderChangeIcon(record.dailyFullyVaccinated, prevRecord.dailyFullyVaccinated, false) }}
+  </div>
+</div>
+{% endmacro %}
+
+{% macro totalVaccinationTable(record, prevRecord, firstRecord) %}
+<div id="province-total-vacc-{{ record.province | slug }}" 
+   class="daily__table-head daily__table-head--total-vacc-{{ record.province | slug }}">
+  <h2>Impfungen <span>in {{ record.province }}</span></h2>
+  <div class="tagline">Gesamtzahlen seit {{ firstRecord.date | formatDate('DD.MM.YYYY') }}</div>
+  {% if record.provinceId !== 10 %}
+  <a href="#daily" class="to-top">Nach oben</a>
+  {% endif %}
+</div>
+<div class="daily__table daily__table--total-vacc-{{ record.province | slug }}">
+  <div class="daily__table-row">
+    <div class="label">Eingetragene Impfungen</div>
+    <div class="spacer"></div>
+    <div class="number">{{ record.registeredVaccinations | formatNumber }}</div>
+  </div>
+  <div class="daily__table-row">
+    <div class="label">Impfungen 1. Dosis</div>
+    <div class="spacer"></div>
+    <div class="number">{{ record.partlyVaccinated | formatNumber }}</div>
+  </div>
+  <div class="daily__table-row">
+    <div class="label">Impfungen 2. Dosis</div>
+    <div class="spacer"></div>
+    <div class="number">{{ record.fullyVaccinated | formatNumber }}</div>
   </div>
 </div>
 {% endmacro %}

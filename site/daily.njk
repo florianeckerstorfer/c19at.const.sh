@@ -11,6 +11,7 @@ permalink: "daily/{{ record.date|formatDate('YYYY-MM-DD') }}/index.html"
                                   dailyTopIncidence, 
                                   totalTopCases, 
                                   dailyVaccinationTable,
+                                  totalVaccinationTable,
                                   incidenceBarChart,
                                   casesBarChart %}
 
@@ -38,7 +39,7 @@ permalink: "daily/{{ record.date|formatDate('YYYY-MM-DD') }}/index.html"
   {% endif -%}
   
   <div class="daily__update">
-    <em>{{ pagination.pages | daysSinceFirstCase(record.date) }} Tage</em> seit dem ersten Fall. 
+    <em>{{ pagination.pages | daysSinceFirstCase(record.date) }} Tage</em> seit dem ersten Fall in Österreich. 
     Neueste Daten vom <em>{{ pagination.pages[pagination.pages.length - 1].date | formatDate('DD. MMMM YYYY') | translateDate }}</em>.
     Zuletzt aktualisiert am 
     <em>{{ currentDate | formatDate('DD. MMMM YYYY') | translateDate }}</em> um 
@@ -47,7 +48,7 @@ permalink: "daily/{{ record.date|formatDate('YYYY-MM-DD') }}/index.html"
   
   {{ dailyTable(record.austria, prevRecord.austria) }}
   
-  {{ totalTable(record.austria) }}
+  {{ totalTable(record.austria, pagination.pages[0]) }}
   
   <div class="daily__chart daily__chart--incidence-osterreich">
     {{ incidenceBarChart(pagination.pages | recordsUntil(record.date) | arraySlice(-60) | recordsForProvince(10), record.austria.province) }}
@@ -59,6 +60,7 @@ permalink: "daily/{{ record.date|formatDate('YYYY-MM-DD') }}/index.html"
   
   {% if record.vaccinationsAustria %}
     {{ dailyVaccinationTable(record.vaccinationsAustria, prevRecord.vaccinationsAustria) }}
+    {{ totalVaccinationTable(record.vaccinationsAustria, prevRecord.vaccinationsAustria, pagination.pages[0]) }}
   {% endif %}
   
   <div class="daily__province-nav">
@@ -70,11 +72,11 @@ permalink: "daily/{{ record.date|formatDate('YYYY-MM-DD') }}/index.html"
   </div>
   
   {{ dailyTopIncidence(record) }}
-  {{ totalTopCases(record) }}
+  {{ totalTopCases(record, pagination.pages[0]) }}
   
   {% for province in record.provinces %}
     {{ dailyTable(province, prevRecord.provinces[loop.index0]) }}
-    {{ totalTable(province, prevRecord.provinces[loop.index0]) }}
+    {{ totalTable(province, pagination.pages[0]) }}
     
     <div class="daily__chart daily__chart--incidence-{{ province.province | slug }}">
       {{ incidenceBarChart(pagination.pages | recordsUntil(record.date) | arraySlice(-60) | recordsForProvince(province.provinceId), province.province) }}
