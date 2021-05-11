@@ -170,15 +170,13 @@
 </div>
 {% endmacro %}
 
-{% macro incidenceBarChart(records) %}
+{% macro incidenceBarChart(records, province) %}
   {% set maxValue = records | maxIncidence %}
   <figure>
     <svg viewBox="0 0 300 50" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
       <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-      {% set height100 = (50 / maxValue) * 100 %}
-      <rect x="0" y="{{ 50 - height100 }}" width="300" height="1" fill="#999999"></rect>
         {% for record in records %}
-          {% set recordHeight = (50 / maxValue) * record.austria.sevenDayIncidence %}
+          {% set recordHeight = (50 / maxValue) * record.sevenDayIncidence %}
           <rect x="{{ loop.index0 * 4.84 + 6 }}" 
                 y="{{ 50 - recordHeight }}" 
                 width="3" 
@@ -187,17 +185,17 @@
         {% endfor %}
       </g>
     </svg>
-    <figcaption>7-Tage-Inzidenz in den letzten 60 Tagen</figcaption>
+    <figcaption>7-Tage-Inzidenz ({{ province }}) in den letzten 60 Tagen</figcaption>
   </figure>
 {% endmacro %}
 
-{% macro casesBarChart(records) %}
+{% macro casesBarChart(records, province) %}
 {% set maxValue = records | maxCases %}
 <figure>
   <svg viewBox="0 0 300 50" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
       {% for record in records %}
-        {% set recordHeight = (50 / maxValue) * record.austria.casesDaily %}
+        {% set recordHeight = (50 / maxValue) * record.casesDaily %}
         <rect x="{{ loop.index0 * 5.04 }}" 
               y="{{ 50 - recordHeight }}" 
               width="3" 
@@ -206,6 +204,6 @@
       {% endfor %}
     </g>
   </svg>
-  <figcaption>Neue Fälle in den letzten 60 Tagen</figcaption>
+  <figcaption>Neue Fälle ({{ province }}) in den letzten 60 Tagen</figcaption>
 </figure>
 {% endmacro %}

@@ -50,11 +50,11 @@ permalink: "daily/{{ record.date|formatDate('YYYY-MM-DD') }}/index.html"
   {{ totalTable(record.austria) }}
   
   <div class="daily__chart daily__chart--incidence-osterreich">
-    {{ incidenceBarChart(pagination.pages | recordsUntil(record.date) | arraySlice(-60)) }}
+    {{ incidenceBarChart(pagination.pages | recordsUntil(record.date) | arraySlice(-60) | recordsForProvince(10), record.austria.province) }}
   </div>
   
   <div class="daily__chart daily__chart--cases-osterreich">
-    {{ casesBarChart(pagination.pages | recordsUntil(record.date) | arraySlice(-60)) }}
+    {{ casesBarChart(pagination.pages | recordsUntil(record.date) | arraySlice(-60) | recordsForProvince(10), record.austria.province) }}
   </div>
   
   {% if record.vaccinationsAustria %}
@@ -75,6 +75,14 @@ permalink: "daily/{{ record.date|formatDate('YYYY-MM-DD') }}/index.html"
   {% for province in record.provinces %}
     {{ dailyTable(province, prevRecord.provinces[loop.index0]) }}
     {{ totalTable(province, prevRecord.provinces[loop.index0]) }}
+    
+    <div class="daily__chart daily__chart--incidence-{{ province.province | slug }}">
+      {{ incidenceBarChart(pagination.pages | recordsUntil(record.date) | arraySlice(-60) | recordsForProvince(province.provinceId), province.province) }}
+    </div>
+    
+    <div class="daily__chart daily__chart--cases-{{ province.province | slug }}">
+      {{ casesBarChart(pagination.pages | recordsUntil(record.date) | arraySlice(-60) | recordsForProvince(province.provinceId), province.province) }}
+    </div>
   {% endfor %}
   
 </div>

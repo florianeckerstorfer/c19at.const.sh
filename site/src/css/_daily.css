@@ -26,38 +26,56 @@
     'daily-burgenland daily-burgenland'
     'total-burgenland-head total-burgenland-head'
     'total-burgenland total-burgenland'
+    'incidence-chart-burgenland incidence-chart-burgenland'
+    'cases-chart-burgenland cases-chart-burgenland'
     'daily-karnten-head daily-karnten-head'
     'daily-karnten daily-karnten'
     'total-karnten-head total-karnten-head'
     'total-karnten total-karnten'
+    'incidence-chart-karnten incidence-chart-karnten'
+    'cases-chart-karnten cases-chart-karnten'
     'daily-niederosterreich-head daily-niederosterreich-head'
     'daily-niederosterreich daily-niederosterreich'
     'total-niederosterreich-head total-niederosterreich-head'
     'total-niederosterreich total-niederosterreich'
+    'incidence-chart-niederosterreich incidence-chart-niederosterreich'
+    'cases-chart-niederosterreich cases-chart-niederosterreich'
     'daily-oberosterreich-head daily-oberosterreich-head'
     'daily-oberosterreich daily-oberosterreich'
     'total-oberosterreich-head total-oberosterreich-head'
     'total-oberosterreich total-oberosterreich'
+    'incidence-chart-oberosterreich incidence-chart-oberosterreich'
+    'cases-chart-oberosterreich cases-chart-oberosterreich'
     'daily-salzburg-head daily-salzburg-head'
     'daily-salzburg daily-salzburg'
     'total-salzburg-head total-salzburg-head'
     'total-salzburg total-salzburg'
+    'incidence-chart-salzburg incidence-chart-salzburg'
+    'cases-chart-salzburg cases-chart-salzburg'
     'daily-steiermark-head daily-steiermark-head'
     'daily-steiermark daily-steiermark'
     'total-steiermark-head total-steiermark-head'
     'total-steiermark total-steiermark'
+    'incidence-chart-steiermark incidence-chart-steiermark'
+    'cases-chart-steiermark cases-chart-steiermark'
     'daily-tirol-head daily-tirol-head'
     'daily-tirol daily-tirol'
     'total-tirol-head total-tirol-head'
     'total-tirol total-tirol'
+    'incidence-chart-tirol incidence-chart-tirol'
+    'cases-chart-tirol cases-chart-tirol'
     'daily-vorarlberg-head daily-vorarlberg-head'
     'daily-vorarlberg daily-vorarlberg'
     'total-vorarlberg-head total-vorarlberg-head'
     'total-vorarlberg total-vorarlberg'
+    'incidence-chart-vorarlberg incidence-chart-vorarlberg'
+    'cases-chart-vorarlberg cases-chart-vorarlberg'
     'daily-wien-head daily-wien-head'
     'daily-wien daily-wien'
     'total-wien-head total-wien-head'
-    'total-wien total-wien';
+    'total-wien total-wien'
+    'incidence-chart-wien incidence-chart-wien'
+    'cases-chart-wien cases-chart-wien';
 }
 
 @media screen and (min-width: 650px) {
@@ -78,22 +96,31 @@
       'daily-top-incidence total-top-cases'
       'daily-burgenland-head total-burgenland-head'
       'daily-burgenland total-burgenland'
+      'incidence-chart-burgenland cases-chart-burgenland'
       'daily-karnten-head total-karnten-head'
       'daily-karnten total-karnten'
+      'incidence-chart-karnten cases-chart-karnten'
       'daily-niederosterreich-head total-niederosterreich-head'
       'daily-niederosterreich total-niederosterreich'
+      'incidence-chart-niederosterreich cases-chart-niederosterreich'
       'daily-oberosterreich-head total-oberosterreich-head'
       'daily-oberosterreich total-oberosterreich'
+      'incidence-chart-oberosterreich cases-chart-oberosterreich'
       'daily-salzburg-head total-salzburg-head'
       'daily-salzburg total-salzburg'
+      'incidence-chart-salzburg cases-chart-salzburg'
       'daily-steiermark-head total-steiermark-head'
       'daily-steiermark total-steiermark'
+      'incidence-chart-steiermark cases-chart-steiermark'
       'daily-tirol-head total-tirol-head'
       'daily-tirol total-tirol'
+      'incidence-chart-tirol cases-chart-tirol'
       'daily-vorarlberg-head total-vorarlberg-head'
       'daily-vorarlberg total-vorarlberg'
+      'incidence-chart-vorarlberg cases-chart-vorarlberg'
       'daily-wien-head total-wien-head'
-      'daily-wien total-wien';
+      'daily-wien total-wien'
+      'incidence-chart-wien cases-chart-wien';
   }
 }
 
@@ -112,22 +139,31 @@
       '. daily-top-incidence total-top-cases'
       '. daily-burgenland-head total-burgenland-head'
       '. daily-burgenland total-burgenland'
+      '. incidence-chart-burgenland cases-chart-burgenland'
       '. daily-karnten-head total-karnten-head'
       '. daily-karnten total-karnten'
+      '. incidence-chart-karnten cases-chart-karnten'
       '. daily-niederosterreich-head total-niederosterreich-head'
       '. daily-niederosterreich total-niederosterreich'
+      '. incidence-chart-niederosterreich cases-chart-niederosterreich'
       '. daily-oberosterreich-head total-oberosterreich-head'
       '. daily-oberosterreich total-oberosterreich'
+      '. incidence-chart-oberosterreich cases-chart-oberosterreich'
       '. daily-salzburg-head total-salzburg-head'
       '. daily-salzburg total-salzburg'
+      '. incidence-chart-salzburg cases-chart-salzburg'
       '. daily-steiermark-head total-steiermark-head'
       '. daily-steiermark total-steiermark'
+      '. incidence-chart-steiermark cases-chart-steiermark'
       '. daily-tirol-head total-tirol-head'
       '. daily-tirol total-tirol'
+      '. incidence-chart-tirol cases-chart-tirol'
       '. daily-vorarlberg-head total-vorarlberg-head'
       '. daily-vorarlberg total-vorarlberg'
+      '. incidence-chart-vorarlberg cases-chart-vorarlberg'
       '. daily-wien-head total-wien-head'
-      '. daily-wien total-wien';
+      '. daily-wien total-wien'
+      '. incidence-chart-wien cases-chart-wien';
   }
 }
 
@@ -548,6 +584,78 @@
 
 .daily__chart--cases-osterreich {
   grid-area: cases-chart-osterreich;
+}
+
+.daily__chart--incidence-burgenland {
+  grid-area: incidence-chart-burgenland;
+}
+
+.daily__chart--cases-burgenland {
+  grid-area: cases-chart-burgenland;
+}
+
+.daily__chart--incidence-karnten {
+  grid-area: incidence-chart-karnten;
+}
+
+.daily__chart--cases-karnten {
+  grid-area: cases-chart-karnten;
+}
+
+.daily__chart--incidence-niederosterreich {
+  grid-area: incidence-chart-niederosterreich;
+}
+
+.daily__chart--cases-niederosterreich {
+  grid-area: cases-chart-niederosterreich;
+}
+
+.daily__chart--incidence-oberosterreich {
+  grid-area: incidence-chart-oberosterreich;
+}
+
+.daily__chart--cases-oberosterreich {
+  grid-area: cases-chart-oberosterreich;
+}
+
+.daily__chart--incidence-salzburg {
+  grid-area: incidence-chart-salzburg;
+}
+
+.daily__chart--cases-salzburg {
+  grid-area: cases-chart-salzburg;
+}
+
+.daily__chart--incidence-steiermark {
+  grid-area: incidence-chart-steiermark;
+}
+
+.daily__chart--cases-steiermark {
+  grid-area: cases-chart-steiermark;
+}
+
+.daily__chart--incidence-tirol {
+  grid-area: incidence-chart-tirol;
+}
+
+.daily__chart--cases-tirol {
+  grid-area: cases-chart-tirol;
+}
+
+.daily__chart--incidence-vorarlberg {
+  grid-area: incidence-chart-vorarlberg;
+}
+
+.daily__chart--cases-vorarlberg {
+  grid-area: cases-chart-vorarlberg;
+}
+
+.daily__chart--incidence-wien {
+  grid-area: incidence-chart-wien;
+}
+
+.daily__chart--cases-wien {
+  grid-area: cases-chart-wien;
 }
 
 .daily__chart svg {
