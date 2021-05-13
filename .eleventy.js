@@ -11,6 +11,7 @@ const translateDateFilter = require('./site/src/filters/translate-date-filter');
 const daysSinceFirstCaseFilter = require('./site/src/filters/days-since-first-case-filter');
 const recordsUntilFilter = require('./site/src/filters/records-until-filter');
 const recordsForProvinceFilter = require('./site/src/filters/records-for-province-filter');
+const vaccinationRecordsForProvinceFilter = require('./site/src/filters/vaccination-records-for-province-filter');
 
 module.exports = function (eleventyConfig) {
   eleventyConfig.addFilter('formatDate', formatDateFilter);
@@ -26,6 +27,10 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addFilter('daysSinceFirstCase', daysSinceFirstCaseFilter);
   eleventyConfig.addFilter('recordsUntil', recordsUntilFilter);
   eleventyConfig.addFilter('recordsForProvince', recordsForProvinceFilter);
+  eleventyConfig.addFilter(
+    'vaccinationRecordsForProvince',
+    vaccinationRecordsForProvinceFilter
+  );
 
   eleventyConfig.addLayoutAlias('base', 'base.njk');
 

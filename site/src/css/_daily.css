@@ -15,6 +15,7 @@
     'cases-chart-osterreich cases-chart-osterreich'
     'daily-vacc-osterreich-head daily-vacc-osterreich-head'
     'daily-vacc-osterreich daily-vacc-osterreich'
+    'vaccination-progress-chart-osterreich vaccination-progress-chart-osterreich'
     'vaccination-chart-osterreich vaccination-chart-osterreich'
     'total-vacc-osterreich-head total-vacc-osterreich-head'
     'total-vacc-osterreich total-vacc-osterreich'
@@ -94,7 +95,7 @@
       'incidence-chart-osterreich cases-chart-osterreich'
       'daily-vacc-osterreich-head total-vacc-osterreich-head'
       'daily-vacc-osterreich total-vacc-osterreich'
-      'vaccination-chart-osterreich .'
+      'vaccination-chart-osterreich vaccination-progress-chart-osterreich'
       'province-nav province-nav'
       'daily-top-incidence-head total-top-cases-head'
       'daily-top-incidence total-top-cases'
@@ -138,7 +139,7 @@
       '. incidence-chart-osterreich cases-chart-osterreich'
       '. daily-vacc-osterreich-head total-vacc-osterreich-head'
       '. daily-vacc-osterreich total-vacc-osterreich'
-      '. vaccination-chart-osterreich .'
+      '. vaccination-chart-osterreich vaccination-progress-chart-osterreich'
       '. province-nav province-nav'
       '. daily-top-incidence-head total-top-cases-head'
       '. daily-top-incidence total-top-cases'
@@ -675,6 +676,10 @@
   grid-area: vaccination-chart-osterreich;
 }
 
+.daily__chart--vaccination-progress-osterreich {
+  grid-area: vaccination-progress-chart-osterreich;
+}
+
 .daily__chart .chart-incidence,
 .daily__chart .chart-cases {
   width: 100%;
@@ -682,35 +687,69 @@
 }
 
 .daily__chart .chart-vaccinations {
+  height: 50px;
+  margin-bottom: 4px;
+  position: relative;
+}
+
+.daily__chart .chart-vaccinations__line {
+  font-size: 12px;
+  left: 0;
+  line-height: 14px;
+  position: absolute;
+  width: 100%;
+}
+
+.daily__chart .chart-vaccinations__line-100 {
+  border-top: 1px solid #ba3b46;
+  top: 0;
+}
+
+.daily__chart .chart-vaccinations__line-50 {
+  border-top: 1px solid #bf979c;
+  top: 25px;
+}
+
+.daily__chart .chart-vaccinations__bars {
+  height: 50px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.daily__chart .chart-vaccination-progress {
   display: block;
   margin-bottom: 0.25rem;
   width: 100%;
 }
 
-.daily__chart .chart-vaccinations text {
+.daily__chart .chart-vaccination-progress text {
   /* font-size = target-font-size / (min-image-width / viewbox-width) */
   /* font-size = 12 / (280 / 300) */
   font-size: calc(12.8px + -6.4 * ((100vw - 320px) / 320));
 }
 
 @media (min-width: 650px) {
-  .daily__chart .chart-vaccinations text {
+  .daily__chart .chart-vaccination-progress text {
+    /* font-size = 12 / (293 / 300) */
     font-size: calc(12.29px + -6.14 * ((100vw - 650px) / 650));
   }
 }
 
 @media (min-width: 950px) {
-  .daily__chart .chart-vaccinations text {
+  .daily__chart .chart-vaccination-progress text {
+    /* font-size = 12 / (287 / 300) */
     font-size: calc(12.54px + -6.27 * ((100vw - 950px) / 950));
   }
 }
 
 @media (min-width: 1900px) {
-  .daily__chart .chart-vaccinations {
+  .daily__chart .chart-vaccination-progress {
     margin: 0 auto;
     width: 600px;
   }
-  .daily__chart .chart-vaccinations text {
+  .daily__chart .chart-vaccination-progress text {
     font-size: 6.69px;
   }
 }

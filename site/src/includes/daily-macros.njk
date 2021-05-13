@@ -190,14 +190,20 @@
     <div class="number">{{ record.registeredVaccinations | formatNumber }}</div>
   </div>
   <div class="daily__table-row">
-    <div class="label">Impfungen 1. Dosis</div>
+    <div class="label">Teilgeimpfte</div>
     <div class="spacer"></div>
-    <div class="number">{{ record.partlyVaccinated | formatNumber }}</div>
+    <div class="number">
+      {{ record.partlyVaccinated | formatNumber }}
+      ({{ record.partlyVaccinatedPer100 | formatNumber }}%)
+    </div>
   </div>
   <div class="daily__table-row">
-    <div class="label">Impfungen 2. Dosis</div>
+    <div class="label">Vollimmunisierte</div>
     <div class="spacer"></div>
-    <div class="number">{{ record.fullyVaccinated | formatNumber }}</div>
+    <div class="number">
+      {{ record.fullyVaccinated | formatNumber }}
+      ({{ record.fullyVaccinatedPer100 | formatNumber }}%)
+    </div>
   </div>
 </div>
 {% endmacro %}
@@ -240,12 +246,38 @@
 </figure>
 {% endmacro %}
 
+{% macro vaccinationBarChart(records, province) %}
+<figure>
+  <div class="chart-vaccinations">
+    <div class="chart-vaccinations__line chart-vaccinations__line-100">100%</div>
+    <div class="chart-vaccinations__line chart-vaccinations__line-50">50%</div>
+    <svg class="chart-vaccinations__bars" viewBox="0 0 300 50" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+      {% for record in records %}
+        {% set partlyHeight = (50 / 100) * record.partlyVaccinatedPer100 %}
+        {% set fullyHeight = (50 / 100) * record.fullyVaccinatedPer100 %}
+        <rect x="{{ loop.index0 * 5.04 }}" 
+              y="{{ 50 - partlyHeight }}" 
+              width="3" 
+              height="{{ partlyHeight }}" 
+              fill="#ccc"></rect>
+        <rect x="{{ loop.index0 * 5.04 }}" 
+              y="{{ 50 - fullyHeight }}" 
+              width="3" 
+              height="{{ fullyHeight }}" 
+              fill="#000"></rect>
+      {% endfor %}
+    </svg>
+  </div>
+  <figcaption>Teilgeimpfte und Vollimmunisierte in den letzten 60 Tagen</figcaption>
+</figure>
+{% endmacro %}
+
 {% macro vaccinationProgressChart(record, province) %}
 {% set textAnchor = "start" if record.fullyVaccinatedPer100 | int < 20 else "end" %}
 {% set partlyTextX = record.partlyVaccinatedPer100 * 3 + 3 if record.fullyVaccinatedPer100 | int < 20 else record.partlyVaccinatedPer100 * 3 - 3 %}
 {% set fullyTextX = record.fullyVaccinatedPer100 * 3 + 3 if record.fullyVaccinatedPer100 | int < 20 else record.fullyVaccinatedPer100 * 3 - 3 %}
 <figure>
-  <svg class="chart-vaccinations" viewBox="0 0 300 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <svg class="chart-vaccination-progress" viewBox="0 0 300 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <defs>
       <pattern id="diagonal-lines" patternUnits="userSpaceOnUse" width="6" height="6">
         <g fill="#000000">
