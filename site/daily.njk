@@ -13,7 +13,8 @@ permalink: "daily/{{ record.date|formatDate('YYYY-MM-DD') }}/index.html"
                                   dailyVaccinationTable,
                                   totalVaccinationTable,
                                   incidenceBarChart,
-                                  casesBarChart %}
+                                  casesBarChart,
+                                  vaccinationProgressChart %}
 
 {% set prevRecord = pagination.pages[pagination.pageNumber - 1] %}
 
@@ -61,6 +62,10 @@ permalink: "daily/{{ record.date|formatDate('YYYY-MM-DD') }}/index.html"
   {% if record.vaccinationsAustria %}
     {{ dailyVaccinationTable(record.vaccinationsAustria, prevRecord.vaccinationsAustria) }}
     {{ totalVaccinationTable(record.vaccinationsAustria, prevRecord.vaccinationsAustria, pagination.pages[0]) }}
+    
+    <div class="daily__chart daily__chart--vaccination-osterreich">
+      {{ vaccinationProgressChart(record.vaccinationsAustria, record.austria.province) }}
+    </div>
   {% endif %}
   
   <div class="daily__province-nav">
