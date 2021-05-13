@@ -93,6 +93,7 @@ module.exports = function (vaccinationTimeline) {
       ),
       registeredJanssen: parseInt(record.EingetrageneImpfungenJanssen, 10),
     }))
+    .filter((record) => record.provinceId > 0)
     .groupBy((record) => record.dateYYYYMMDD)
     .flatMap((dailyRecord, index, dailyRecords) => {
       return dailyRecord.map((record) => {

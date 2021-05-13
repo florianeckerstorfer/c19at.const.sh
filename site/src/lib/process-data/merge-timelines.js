@@ -1,3 +1,4 @@
+const _ = require('lodash');
 const { isAustria, isProvince } = require('../data-helper');
 
 module.exports = function (caseTimeline, vaccinationTimeline) {
@@ -6,7 +7,10 @@ module.exports = function (caseTimeline, vaccinationTimeline) {
     return {
       ...record,
       vaccinationsAustria: vaccinations?.find(isAustria),
-      vaccinationsProvinces: vaccinations?.filter(isProvince),
+      vaccinationsProvinces: _.chain(vaccinations || [])
+        .filter(isProvince)
+        .sortBy((record) => record.provinceId)
+        .value(),
     };
   });
 };

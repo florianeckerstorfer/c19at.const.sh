@@ -10,14 +10,14 @@
 
 {% macro dailyTable(record, prevRecord) %}
 <div id="province-daily-{{ record.province | slug }}" 
-     class="daily__table-head daily__table-head--daily-{{ record.province | slug }}">
+     class="daily__table-head daily__table-head--daily">
   <h2>Tag <span>in {{ record.province }}</span></h2>
   {% if record.provinceId !== 10 %}
   <a href="#daily" class="to-top">Nach oben</a>
   {% endif %}
   <div class="tagline">Zahlen für {{ record.date | formatDate('DD. MMMM') | translateDate }}</div>
 </div>
-<div class="daily__table daily__table--daily-{{ record.province | slug }}">
+<div class="daily__table daily__table--daily">
   <div class="daily__table-row">
     <div class="label">7-Tage-Inzidenz</div>
     <div class="spacer"></div>
@@ -61,11 +61,11 @@
 
 {% macro totalTable(record, firstRecord) %}
 <div id="province-total-{{ record.province | slug }}" 
-     class="daily__table-head daily__table-head--total-{{ record.province | slug }}">
+     class="daily__table-head daily__table-head--total">
   <h2>Gesamtzahlen <span>für {{ record.province }}</span></h2>
   <div class="tagline">Seit {{ firstRecord.date | formatDate('DD.MM.YYYY') }}</div>
 </div>
-<div class="daily__table daily__table--total-{{ record.province | slug }}">
+<div class="daily__table daily__table--total">
   <div class="daily_table-row daily_table-row--placeholder"></div>
   <div class="daily__table-row">
     <div class="label">Fälle</div>
@@ -145,14 +145,14 @@
 
 {% macro dailyVaccinationTable(record, prevRecord) %}
 <div id="province-daily-vacc-{{ record.province | slug }}" 
-   class="daily__table-head daily__table-head--daily-vacc-{{ record.province | slug }}">
+   class="daily__table-head daily__table-head--daily-vacc">
   <h2>Impfungen <span>in {{ record.province }}</span></h2>
   {% if record.provinceId !== 10 %}
   <a href="#daily" class="to-top">Nach oben</a>
   {% endif %}
   <div class="tagline">Zahlen für {{ record.date | formatDate('DD. MMMM') | translateDate }}</div>
 </div>
-<div class="daily__table daily__table--daily-vacc-{{ record.province | slug }}">
+<div class="daily__table daily__table--daily-vacc">
   <div class="daily__table-row">
     <div class="label">Eingetragene Impfungen</div>
     <div class="spacer"></div>
@@ -176,14 +176,14 @@
 
 {% macro totalVaccinationTable(record, prevRecord, firstRecord) %}
 <div id="province-total-vacc-{{ record.province | slug }}" 
-   class="daily__table-head daily__table-head--total-vacc-{{ record.province | slug }}">
+   class="daily__table-head daily__table-head--total-vacc">
   <h2>Impfungen <span>in {{ record.province }}</span></h2>
   <div class="tagline">Gesamtzahlen seit {{ firstRecord.date | formatDate('DD.MM.YYYY') }}</div>
   {% if record.provinceId !== 10 %}
   <a href="#daily" class="to-top">Nach oben</a>
   {% endif %}
 </div>
-<div class="daily__table daily__table--total-vacc-{{ record.province | slug }}">
+<div class="daily__table daily__table--total-vacc">
   <div class="daily__table-row">
     <div class="label">Eingetragene Impfungen</div>
     <div class="spacer"></div>

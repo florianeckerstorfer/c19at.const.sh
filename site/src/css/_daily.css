@@ -3,174 +3,8 @@
   gap: 1rem;
   padding: 1rem;
   background: var(--dashboard-bg-color);
+  grid-auto-flow: row dense;
   grid-template-columns: repeat(2, 1fr);
-  grid-template-areas:
-    'title title'
-    'nav-previous nav-next'
-    'date date'
-    'update update'
-    'daily-osterreich-head daily-osterreich-head'
-    'daily-osterreich daily-osterreich'
-    'incidence-chart-osterreich incidence-chart-osterreich'
-    'cases-chart-osterreich cases-chart-osterreich'
-    'daily-vacc-osterreich-head daily-vacc-osterreich-head'
-    'daily-vacc-osterreich daily-vacc-osterreich'
-    'vaccination-progress-chart-osterreich vaccination-progress-chart-osterreich'
-    'vaccination-chart-osterreich vaccination-chart-osterreich'
-    'total-vacc-osterreich-head total-vacc-osterreich-head'
-    'total-vacc-osterreich total-vacc-osterreich'
-    'total-osterreich-head total-osterreich-head'
-    'total-osterreich total-osterreich'
-    'daily-top-incidence-head daily-top-incidence-head'
-    'daily-top-incidence daily-top-incidence'
-    'total-top-cases-head total-top-cases-head'
-    'total-top-cases total-top-cases'
-    'province-nav province-nav'
-    'daily-burgenland-head daily-burgenland-head'
-    'daily-burgenland daily-burgenland'
-    'total-burgenland-head total-burgenland-head'
-    'total-burgenland total-burgenland'
-    'incidence-chart-burgenland incidence-chart-burgenland'
-    'cases-chart-burgenland cases-chart-burgenland'
-    'daily-karnten-head daily-karnten-head'
-    'daily-karnten daily-karnten'
-    'total-karnten-head total-karnten-head'
-    'total-karnten total-karnten'
-    'incidence-chart-karnten incidence-chart-karnten'
-    'cases-chart-karnten cases-chart-karnten'
-    'daily-niederosterreich-head daily-niederosterreich-head'
-    'daily-niederosterreich daily-niederosterreich'
-    'total-niederosterreich-head total-niederosterreich-head'
-    'total-niederosterreich total-niederosterreich'
-    'incidence-chart-niederosterreich incidence-chart-niederosterreich'
-    'cases-chart-niederosterreich cases-chart-niederosterreich'
-    'daily-oberosterreich-head daily-oberosterreich-head'
-    'daily-oberosterreich daily-oberosterreich'
-    'total-oberosterreich-head total-oberosterreich-head'
-    'total-oberosterreich total-oberosterreich'
-    'incidence-chart-oberosterreich incidence-chart-oberosterreich'
-    'cases-chart-oberosterreich cases-chart-oberosterreich'
-    'daily-salzburg-head daily-salzburg-head'
-    'daily-salzburg daily-salzburg'
-    'total-salzburg-head total-salzburg-head'
-    'total-salzburg total-salzburg'
-    'incidence-chart-salzburg incidence-chart-salzburg'
-    'cases-chart-salzburg cases-chart-salzburg'
-    'daily-steiermark-head daily-steiermark-head'
-    'daily-steiermark daily-steiermark'
-    'total-steiermark-head total-steiermark-head'
-    'total-steiermark total-steiermark'
-    'incidence-chart-steiermark incidence-chart-steiermark'
-    'cases-chart-steiermark cases-chart-steiermark'
-    'daily-tirol-head daily-tirol-head'
-    'daily-tirol daily-tirol'
-    'total-tirol-head total-tirol-head'
-    'total-tirol total-tirol'
-    'incidence-chart-tirol incidence-chart-tirol'
-    'cases-chart-tirol cases-chart-tirol'
-    'daily-vorarlberg-head daily-vorarlberg-head'
-    'daily-vorarlberg daily-vorarlberg'
-    'total-vorarlberg-head total-vorarlberg-head'
-    'total-vorarlberg total-vorarlberg'
-    'incidence-chart-vorarlberg incidence-chart-vorarlberg'
-    'cases-chart-vorarlberg cases-chart-vorarlberg'
-    'daily-wien-head daily-wien-head'
-    'daily-wien daily-wien'
-    'total-wien-head total-wien-head'
-    'total-wien total-wien'
-    'incidence-chart-wien incidence-chart-wien'
-    'cases-chart-wien cases-chart-wien';
-}
-
-@media screen and (min-width: 650px) {
-  .daily {
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-areas:
-      'title title'
-      'nav-previous nav-next'
-      'date date'
-      'update update'
-      'daily-osterreich-head total-osterreich-head'
-      'daily-osterreich total-osterreich'
-      'incidence-chart-osterreich cases-chart-osterreich'
-      'daily-vacc-osterreich-head total-vacc-osterreich-head'
-      'daily-vacc-osterreich total-vacc-osterreich'
-      'vaccination-chart-osterreich vaccination-progress-chart-osterreich'
-      'province-nav province-nav'
-      'daily-top-incidence-head total-top-cases-head'
-      'daily-top-incidence total-top-cases'
-      'daily-burgenland-head total-burgenland-head'
-      'daily-burgenland total-burgenland'
-      'incidence-chart-burgenland cases-chart-burgenland'
-      'daily-karnten-head total-karnten-head'
-      'daily-karnten total-karnten'
-      'incidence-chart-karnten cases-chart-karnten'
-      'daily-niederosterreich-head total-niederosterreich-head'
-      'daily-niederosterreich total-niederosterreich'
-      'incidence-chart-niederosterreich cases-chart-niederosterreich'
-      'daily-oberosterreich-head total-oberosterreich-head'
-      'daily-oberosterreich total-oberosterreich'
-      'incidence-chart-oberosterreich cases-chart-oberosterreich'
-      'daily-salzburg-head total-salzburg-head'
-      'daily-salzburg total-salzburg'
-      'incidence-chart-salzburg cases-chart-salzburg'
-      'daily-steiermark-head total-steiermark-head'
-      'daily-steiermark total-steiermark'
-      'incidence-chart-steiermark cases-chart-steiermark'
-      'daily-tirol-head total-tirol-head'
-      'daily-tirol total-tirol'
-      'incidence-chart-tirol cases-chart-tirol'
-      'daily-vorarlberg-head total-vorarlberg-head'
-      'daily-vorarlberg total-vorarlberg'
-      'incidence-chart-vorarlberg cases-chart-vorarlberg'
-      'daily-wien-head total-wien-head'
-      'daily-wien total-wien'
-      'incidence-chart-wien cases-chart-wien';
-  }
-}
-
-@media screen and (min-width: 950px) {
-  .daily {
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-areas:
-      'nav-previous title nav-next'
-      'date daily-osterreich-head total-osterreich-head'
-      'update daily-osterreich total-osterreich'
-      '. incidence-chart-osterreich cases-chart-osterreich'
-      '. daily-vacc-osterreich-head total-vacc-osterreich-head'
-      '. daily-vacc-osterreich total-vacc-osterreich'
-      '. vaccination-chart-osterreich vaccination-progress-chart-osterreich'
-      '. province-nav province-nav'
-      '. daily-top-incidence-head total-top-cases-head'
-      '. daily-top-incidence total-top-cases'
-      '. daily-burgenland-head total-burgenland-head'
-      '. daily-burgenland total-burgenland'
-      '. incidence-chart-burgenland cases-chart-burgenland'
-      '. daily-karnten-head total-karnten-head'
-      '. daily-karnten total-karnten'
-      '. incidence-chart-karnten cases-chart-karnten'
-      '. daily-niederosterreich-head total-niederosterreich-head'
-      '. daily-niederosterreich total-niederosterreich'
-      '. incidence-chart-niederosterreich cases-chart-niederosterreich'
-      '. daily-oberosterreich-head total-oberosterreich-head'
-      '. daily-oberosterreich total-oberosterreich'
-      '. incidence-chart-oberosterreich cases-chart-oberosterreich'
-      '. daily-salzburg-head total-salzburg-head'
-      '. daily-salzburg total-salzburg'
-      '. incidence-chart-salzburg cases-chart-salzburg'
-      '. daily-steiermark-head total-steiermark-head'
-      '. daily-steiermark total-steiermark'
-      '. incidence-chart-steiermark cases-chart-steiermark'
-      '. daily-tirol-head total-tirol-head'
-      '. daily-tirol total-tirol'
-      '. incidence-chart-tirol cases-chart-tirol'
-      '. daily-vorarlberg-head total-vorarlberg-head'
-      '. daily-vorarlberg total-vorarlberg'
-      '. incidence-chart-vorarlberg cases-chart-vorarlberg'
-      '. daily-wien-head total-wien-head'
-      '. daily-wien total-wien'
-      '. incidence-chart-wien cases-chart-wien';
-  }
 }
 
 .daily > * {
@@ -179,7 +13,7 @@
 .daily__title {
   background: var(--dark);
   color: var(--dark-contrast);
-  grid-area: title;
+  grid-column: span 2;
   padding: 0.25rem;
 }
 
@@ -199,7 +33,7 @@
   color: var(--dark-contrast);
   display: flex;
   flex-direction: row;
-  grid-area: date;
+  grid-column: span 2;
   padding: 0.25rem;
   justify-content: space-between;
 }
@@ -230,12 +64,10 @@
 }
 
 .daily__date-nav--previous {
-  grid-area: nav-previous;
   justify-content: flex-start;
 }
 
 .daily__date-nav--next {
-  grid-area: nav-next;
   justify-content: flex-end;
 }
 
@@ -272,7 +104,7 @@
 
 .daily__update {
   font-size: 0.85rem;
-  grid-area: update;
+  grid-column: span 2;
   padding: 0.25rem;
 }
 
@@ -281,112 +113,9 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  grid-column: span 2;
   justify-content: space-between;
   padding: 0.25rem;
-}
-
-.daily__table-head--daily-osterreich {
-  grid-area: daily-osterreich-head;
-}
-
-.daily__table-head--daily-wien {
-  grid-area: daily-wien-head;
-}
-
-.daily__table-head--daily-vorarlberg {
-  grid-area: daily-vorarlberg-head;
-}
-
-.daily__table-head--daily-tirol {
-  grid-area: daily-tirol-head;
-}
-
-.daily__table-head--daily-salzburg {
-  grid-area: daily-salzburg-head;
-}
-
-.daily__table-head--daily-oberosterreich {
-  grid-area: daily-oberosterreich-head;
-}
-
-.daily__table-head--daily-niederosterreich {
-  grid-area: daily-niederosterreich-head;
-}
-
-.daily__table-head--daily-karnten {
-  grid-area: daily-karnten-head;
-}
-
-.daily__table-head--daily-burgenland {
-  grid-area: daily-burgenland-head;
-}
-
-.daily__table-head--daily-steiermark {
-  grid-area: daily-steiermark-head;
-}
-
-.daily__table-head--total-osterreich {
-  grid-area: total-osterreich-head;
-}
-
-.daily__table-head--total-burgenland {
-  grid-area: total-burgenland-head;
-}
-
-.daily__table-head--total-karnten {
-  grid-area: total-karnten-head;
-}
-
-.daily__table-head--total-niederosterreich {
-  grid-area: total-niederosterreich-head;
-}
-
-.daily__table-head--total-oberosterreich {
-  grid-area: total-oberosterreich-head;
-}
-
-.daily__table-head--total-salzburg {
-  grid-area: total-salzburg-head;
-}
-
-.daily__table-head--total-steiermark {
-  grid-area: total-steiermark-head;
-}
-
-.daily__table-head--total-tirol {
-  grid-area: total-tirol-head;
-}
-
-.daily__table-head--total-vorarlberg {
-  grid-area: total-vorarlberg-head;
-}
-
-.daily__table-head--total-wien {
-  grid-area: total-wien-head;
-}
-
-.daily__table-head--daily-top-incidence {
-  grid-area: daily-top-incidence-head;
-}
-
-.daily__table-head--total-top-cases {
-  grid-area: total-top-cases-head;
-}
-
-.daily__table-head--daily-vacc-osterreich {
-  grid-area: daily-vacc-osterreich-head;
-}
-
-.daily__table--daily-vacc-osterreich {
-  grid-area: daily-vacc-osterreich;
-}
-
-.daily__table-head--total-vacc-osterreich {
-  grid-area: total-vacc-osterreich-head;
-}
-
-.daily__table--total-vacc-osterreich {
-  grid-area: total-vacc-osterreich;
 }
 
 .daily__table-head h2 {
@@ -421,94 +150,7 @@
   padding: 0.25rem;
   display: flex;
   flex-direction: column;
-}
-
-.daily__table--daily-osterreich {
-  grid-area: daily-osterreich;
-}
-
-.daily__table--daily-burgenland {
-  grid-area: daily-burgenland;
-}
-
-.daily__table--daily-karnten {
-  grid-area: daily-karnten;
-}
-
-.daily__table--daily-niederosterreich {
-  grid-area: daily-niederosterreich;
-}
-
-.daily__table--daily-oberosterreich {
-  grid-area: daily-oberosterreich;
-}
-
-.daily__table--daily-salzburg {
-  grid-area: daily-salzburg;
-}
-
-.daily__table--daily-steiermark {
-  grid-area: daily-steiermark;
-}
-
-.daily__table--daily-tirol {
-  grid-area: daily-tirol;
-}
-
-.daily__table--daily-vorarlberg {
-  grid-area: daily-vorarlberg;
-}
-
-.daily__table--daily-wien {
-  grid-area: daily-wien;
-}
-
-.daily__table--total-osterreich {
-  grid-area: total-osterreich;
-}
-
-.daily__table--total-burgenland {
-  grid-area: total-burgenland;
-}
-
-.daily__table--total-karnten {
-  grid-area: total-karnten;
-}
-
-.daily__table--total-niederosterreich {
-  grid-area: total-niederosterreich;
-}
-
-.daily__table--total-oberosterreich {
-  grid-area: total-oberosterreich;
-}
-
-.daily__table--total-salzburg {
-  grid-area: total-salzburg;
-}
-
-.daily__table--total-steiermark {
-  grid-area: total-steiermark;
-}
-
-.daily__table--total-tirol {
-  grid-area: total-tirol;
-}
-
-.daily__table--total-vorarlberg {
-  grid-area: total-vorarlberg;
-}
-
-.daily__table--total-wien {
-  grid-area: total-wien;
-}
-
-.daily__table--daily-top-incidence {
-  grid-area: daily-top-incidence;
-}
-
-.daily__table--total-top-cases {
-  grid-area: total-top-cases;
+  grid-column: span 2;
 }
 
 .daily__table-row {
@@ -566,7 +208,7 @@
 }
 
 .daily__province-nav {
-  grid-area: province-nav;
+  grid-column: span 2;
   padding: 0.25rem;
 }
 
@@ -589,95 +231,8 @@
 }
 
 .daily__chart {
+  grid-column: span 2;
   padding: 0.25rem;
-}
-
-.daily__chart--incidence-osterreich {
-  grid-area: incidence-chart-osterreich;
-}
-
-.daily__chart--cases-osterreich {
-  grid-area: cases-chart-osterreich;
-}
-
-.daily__chart--incidence-burgenland {
-  grid-area: incidence-chart-burgenland;
-}
-
-.daily__chart--cases-burgenland {
-  grid-area: cases-chart-burgenland;
-}
-
-.daily__chart--incidence-karnten {
-  grid-area: incidence-chart-karnten;
-}
-
-.daily__chart--cases-karnten {
-  grid-area: cases-chart-karnten;
-}
-
-.daily__chart--incidence-niederosterreich {
-  grid-area: incidence-chart-niederosterreich;
-}
-
-.daily__chart--cases-niederosterreich {
-  grid-area: cases-chart-niederosterreich;
-}
-
-.daily__chart--incidence-oberosterreich {
-  grid-area: incidence-chart-oberosterreich;
-}
-
-.daily__chart--cases-oberosterreich {
-  grid-area: cases-chart-oberosterreich;
-}
-
-.daily__chart--incidence-salzburg {
-  grid-area: incidence-chart-salzburg;
-}
-
-.daily__chart--cases-salzburg {
-  grid-area: cases-chart-salzburg;
-}
-
-.daily__chart--incidence-steiermark {
-  grid-area: incidence-chart-steiermark;
-}
-
-.daily__chart--cases-steiermark {
-  grid-area: cases-chart-steiermark;
-}
-
-.daily__chart--incidence-tirol {
-  grid-area: incidence-chart-tirol;
-}
-
-.daily__chart--cases-tirol {
-  grid-area: cases-chart-tirol;
-}
-
-.daily__chart--incidence-vorarlberg {
-  grid-area: incidence-chart-vorarlberg;
-}
-
-.daily__chart--cases-vorarlberg {
-  grid-area: cases-chart-vorarlberg;
-}
-
-.daily__chart--incidence-wien {
-  grid-area: incidence-chart-wien;
-}
-
-.daily__chart--cases-wien {
-  grid-area: cases-chart-wien;
-}
-
-.daily__chart--vaccination-osterreich {
-  grid-area: vaccination-chart-osterreich;
-}
-
-.daily__chart--vaccination-progress-osterreich {
-  grid-area: vaccination-progress-chart-osterreich;
 }
 
 .daily__chart .chart-incidence,
@@ -730,14 +285,104 @@
   font-size: calc(12.8px + -6.4 * ((100vw - 320px) / 320));
 }
 
-@media (min-width: 650px) {
+.daily__chart figure {
+  margin: 0;
+}
+
+.daily__chart figcaption {
+  color: #999;
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.recorddump {
+  overflow-x: scroll;
+}
+
+@media screen and (min-width: 650px) {
+  .daily {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .daily__table-head--daily,
+  .daily__table-head--daily-vacc,
+  .daily__table--daily-vacc,
+  .daily__table--daily,
+  .daily__table-head--daily-top-incidence,
+  .daily__table--daily-top-incidence {
+    grid-column: 1 / span 1;
+  }
+
+  .daily__table-head--total,
+  .daily__table-head--total-vacc,
+  .daily__table--total,
+  .daily__table--total-vacc,
+  .daily__table-head--total-top-cases,
+  .daily__table--total-top-cases {
+    grid-column: 2 / span 1;
+  }
+
+  .daily__chart {
+    grid-column: span 1;
+  }
+
   .daily__chart .chart-vaccination-progress text {
     /* font-size = 12 / (293 / 300) */
     font-size: calc(12.29px + -6.14 * ((100vw - 650px) / 650));
   }
 }
 
-@media (min-width: 950px) {
+@media screen and (min-width: 950px) {
+  .daily {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .daily__title {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .daily__date,
+  .daily__update {
+    grid-column: 1 / span 1;
+  }
+
+  .daily__date-nav--previous {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .daily__date-nav--next {
+    grid-column: 3;
+    grid-row: 1;
+  }
+
+  .daily__province-nav {
+    grid-column: 2 / span 2;
+  }
+
+  .daily__table-head--daily,
+  .daily__table-head--daily-vacc,
+  .daily__table--daily-vacc,
+  .daily__table--daily,
+  .daily__table-head--daily-top-incidence,
+  .daily__table--daily-top-incidence,
+  .daily__chart--incidence,
+  .daily__chart--vaccination {
+    grid-column: 2 / span 1;
+  }
+
+  .daily__table-head--total,
+  .daily__table-head--total-vacc,
+  .daily__table--total,
+  .daily__table--total-vacc,
+  .daily__table-head--total-top-cases,
+  .daily__table--total-top-cases,
+  .daily__chart--cases,
+  .daily__chart--vaccination-progress {
+    grid-column: 3 / span 1;
+  }
+
   .daily__chart .chart-vaccination-progress text {
     /* font-size = 12 / (287 / 300) */
     font-size: calc(12.54px + -6.27 * ((100vw - 950px) / 950));
@@ -752,18 +397,4 @@
   .daily__chart .chart-vaccination-progress text {
     font-size: 6.69px;
   }
-}
-
-.daily__chart figure {
-  margin: 0;
-}
-
-.daily__chart figcaption {
-  color: #999;
-  font-size: 0.85rem;
-  text-align: center;
-}
-
-.recorddump {
-  overflow-x: scroll;
 }

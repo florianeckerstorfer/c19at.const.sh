@@ -23,22 +23,25 @@ permalink: "daily/{{ record.date|formatDate('YYYY-MM-DD') }}/index.html"
   <div class="daily__title">
     <h1><span>Covid19</span> in Österreich</h1>
   </div>
+  
+  <nav class="daily__date-nav daily__date-nav--previous">
+  {%- if pagination.pageNumber > 0 %}
+      <a href="{{ pagination.href.previous }}">Previous day</a>
+      <div class="date">{{ pagination.page.previous.date | formatDate('MMM DD') | translateDate }}</div>
+  {% endif -%}
+  </nav>
+  
+  <nav class="daily__date-nav daily__date-nav--next">
+  {%- if pagination.page.next %}
+      <a href="{{ pagination.href.next }}">Next day</a>
+      <div class="date">{{ pagination.page.next.date | formatDate('MMM DD') | translateDate }}</div>
+  {% endif -%}
+  </nav>
+  
   <div class="daily__date">
     <div class="weekday">{{ record.date | formatDate('dddd') | translateDate }},</div>
     <div class="date">{{ record.date | formatDate('MMMM DD, YYYY') | translateDate }}</div>
   </div>
-  {%- if pagination.pageNumber > 0 %}
-  <nav class="daily__date-nav daily__date-nav--previous">
-      <a href="{{ pagination.href.previous }}">Previous day</a>
-      <div class="date">{{ pagination.page.previous.date | formatDate('MMM DD') | translateDate }}</div>
-  </nav>
-  {% endif -%}
-  {%- if pagination.page.next %}
-  <nav class="daily__date-nav daily__date-nav--next">
-      <a href="{{ pagination.href.next }}">Next day</a>
-      <div class="date">{{ pagination.page.next.date | formatDate('MMM DD') | translateDate }}</div>
-  </nav>
-  {% endif -%}
   
   <div class="daily__update">
     <em>{{ pagination.pages | daysSinceFirstCase(record.date) }} Tage</em> seit dem ersten Fall in Österreich. 
@@ -52,11 +55,11 @@ permalink: "daily/{{ record.date|formatDate('YYYY-MM-DD') }}/index.html"
   
   {{ totalTable(record.austria, pagination.pages[0]) }}
   
-  <div class="daily__chart daily__chart--incidence-osterreich">
+  <div class="daily__chart daily__chart--incidence">
     {{ incidenceBarChart(pagination.pages | recordsUntil(record.date) | arraySlice(-60) | recordsForProvince(10), record.austria.province) }}
   </div>
   
-  <div class="daily__chart daily__chart--cases-osterreich">
+  <div class="daily__chart daily__chart--cases">
     {{ casesBarChart(pagination.pages | recordsUntil(record.date) | arraySlice(-60) | recordsForProvince(10), record.austria.province) }}
   </div>
   
@@ -64,11 +67,11 @@ permalink: "daily/{{ record.date|formatDate('YYYY-MM-DD') }}/index.html"
     {{ dailyVaccinationTable(record.vaccinationsAustria, prevRecord.vaccinationsAustria) }}
     {{ totalVaccinationTable(record.vaccinationsAustria, prevRecord.vaccinationsAustria, pagination.pages[0]) }}
     
-    <div class="daily__chart daily__chart--vaccination-osterreich">
+    <div class="daily__chart daily__chart--vaccination">
       {{ vaccinationBarChart(pagination.pages | recordsUntil(record.date) | arraySlice(-60) | vaccinationRecordsForProvince(10), record.austria.province) }}
     </div>
     
-    <div class="daily__chart daily__chart--vaccination-progress-osterreich">
+    <div class="daily__chart daily__chart--vaccination-progress">
       {{ vaccinationProgressChart(record.vaccinationsAustria, record.austria.province) }}
     </div>
     
@@ -76,26 +79,41 @@ permalink: "daily/{{ record.date|formatDate('YYYY-MM-DD') }}/index.html"
   
   <div class="daily__province-nav">
     <ul>
-      {% for province in record.provinces %}
+      {% for province in record.provinces | sort(false, false, 'provinceId') %}
         <li><a href="#province-daily-{{ province.province | slug }}">{{ province.province }}</a></li>
       {% endfor %}
     </ul>
   </div>
   
   {{ dailyTopIncidence(record) }}
+  
   {{ totalTopCases(record, pagination.pages[0]) }}
   
-  {% for province in record.provinces %}
-    {{ dailyTable(province, prevRecord.provinces[loop.index0]) }}
-    {{ totalTable(province, pagination.pages[0]) }}
-    
-    <div class="daily__chart daily__chart--incidence-{{ province.province | slug }}">
-      {{ incidenceBarChart(pagination.pages | recordsUntil(record.date) | arraySlice(-60) | recordsForProvince(province.provinceId), province.province) }}
-    </div>
-    
-    <div class="daily__chart daily__chart--cases-{{ province.province | slug }}">
-      {{ casesBarChart(pagination.pages | recordsUntil(record.date) | arraySlice(-60) | recordsForProvince(province.provinceId), province.province) }}
-    </div>
+  {% for province in record.provinces | sort(false, false, 'provinceId') %}
+      {{ dailyTable(province, prevRecord.provinces[loop.index0]) }}
+      {{ totalTable(province, pagination.pages[0]) }}
+      
+      <div class="daily__chart daily__chart--incidence">
+        {{ incidenceBarChart(pagination.pages | recordsUntil(record.date) | arraySlice(-60) | recordsForProvince(province.provinceId), province.province) }}
+      </div>
+      
+      <div class="daily__chart daily__chart--cases">
+        {{ casesBarChart(pagination.pages | recordsUntil(record.date) | arraySlice(-60) | recordsForProvince(province.provinceId), province.province) }}
+      </div>
+      
+      {% if record.vaccinationsProvinces and record.vaccinationsProvinces[loop.index0] and prevRecord.vaccinationsProvinces and prevRecord.vaccinationsProvinces[loop.index0] %}
+      {{ dailyVaccinationTable(record.vaccinationsProvinces[loop.index0], prevRecord.vaccinationsProvinces[loop.index0]) }}
+      
+      {{ totalVaccinationTable(record.vaccinationsProvinces[loop.index0], prevRecord.vaccinationsProvinces[loop.index0], pagination.pages[0]) }}
+      
+      <div class="daily__chart daily__chart--vaccination">
+        {{ vaccinationBarChart(pagination.pages | recordsUntil(record.date) | arraySlice(-60) | vaccinationRecordsForProvince(province.provinceId), province.province) }}
+      </div>
+      
+      <div class="daily__chart daily__chart--vaccination-progress">
+        {{ vaccinationProgressChart(record.vaccinationsProvinces[loop.index0], province.province) }}
+      </div>
+      {% endif %}
   {% endfor %}
   
 </div>

@@ -45,7 +45,10 @@ module.exports = function (caseTimeline) {
       date: _.first(record).date,
       dateYYYYMMDD: _.first(record).dateYYYYMMDD,
       austria: _.find(record, isAustria),
-      provinces: _.filter(record, isProvince),
+      provinces: _.chain(record)
+        .filter(isProvince)
+        .sortBy((record) => record.provinceId)
+        .value(),
     }))
     .value();
 };
