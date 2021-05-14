@@ -1,10 +1,20 @@
 # [c19at.const.sh](https://c19at.const.sh)
 
+Made by [Florian Eckerstorfer](https://florian.ec) in Vienna, Europe.
+
+## Table of Contents
+
+1. [Setup](#setup)
+2. [Code of Conduct](#code-of-conduct)
+3. [License](#license)
+
 ## Setup
 
-Install dependencies:
+Setup:
 
 ```shell
+git clone https://git.sr.ht/~fec/c19at.const.sh
+cd c19at.const.sh
 npm install
 ```
 
@@ -19,3 +29,11 @@ Create production build:
 ```shell
 npm run build
 ```
+
+## Code of Conduct
+
+See [CODE_OF_CONDUCT.md](https://git.sr.ht/~fec/c19at.const.sh/tree/main/item/CODE_OF_CONDUCT.md)
+
+## License
+
+See [LICENSE](https://git.sr.ht/~fec/c19at.const.sh/tree/main/item/LICENSE)
