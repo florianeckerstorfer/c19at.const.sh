@@ -16,6 +16,7 @@ permalink: "daily/{{ record.date|formatDate('YYYY-MM-DD') }}/index.html"
                                   casesBarChart,
                                   vaccinationProgressChart,
                                   vaccinationBarChart %}
+{% from "macros.njk" import dataSources %}
 
 {% set prevRecord = pagination.pages[pagination.pageNumber - 1] %}
 
@@ -117,5 +118,7 @@ permalink: "daily/{{ record.date|formatDate('YYYY-MM-DD') }}/index.html"
       </div>
       {% endif %}
   {% endfor %}
+  
+  {{ dataSources() }}
   
 </div>

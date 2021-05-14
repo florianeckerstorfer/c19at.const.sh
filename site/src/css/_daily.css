@@ -229,6 +229,36 @@
   width: 100%;
 }
 
+.daily__table-head--data,
+.daily__sources {
+  grid-column: span 2;
+}
+
+.daily__sources ul {
+  list-style: none;
+  padding: 0 2rem;
+  margin: 0;
+}
+
+.daily__sources li {
+  margin-bottom: 1rem;
+}
+
+.daily__sources li:last-child {
+  margin-bottom: 0;
+}
+
+.daily__sources li::before {
+  content: '|>';
+  display: inline-block;
+  margin-left: -2rem;
+}
+
+.daily__sources li span {
+  display: block;
+  font-size: 0.85rem;
+}
+
 .recorddump {
   overflow-x: scroll;
 }
@@ -306,6 +336,11 @@
   .daily__chart--cases,
   .daily__chart--vaccination-progress {
     grid-column: 3 / span 1;
+  }
+
+  .daily__table-head--data,
+  .daily__sources {
+    grid-column: 2 / span 2;
   }
 }
 

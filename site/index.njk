@@ -3,6 +3,7 @@ layout: base
 title: COVID19 in Austria
 ---
 {% from "daily-macros.njk" import renderChangeIcon %}
+{% from "macros.njk" import dataSources %}
 
 {% macro timelineChart(records, province) %}
 {% set imageWidth = 300 %}
@@ -78,6 +79,10 @@ title: COVID19 in Austria
     <em>{{ currentDate | formatDate('HH:mm') }}</em>. 
   </div>
   
+  <div class="index__day-list-head"></div>
+  
+  <div class="index__day-list-head"></div>
+  
   <div class="index__chart index__chart--timeline">
     {{ timelineChart(daily | recordsUntil(record.date) | arraySlice(-120) | recordsForProvince(10), 'Österreich') }}
   </div>
@@ -126,4 +131,6 @@ title: COVID19 in Austria
       {% endfor %}
     </ul>
   </div>
+  
+  {{ dataSources() }}
 </div>

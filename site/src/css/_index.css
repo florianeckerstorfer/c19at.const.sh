@@ -112,4 +112,14 @@
     grid-column: 2 / span 2;
     grid-row: 3;
   }
+
+  .index__day-list--last-week,
+  .index__day-list-head--last-week {
+    grid-column: 2 / span 1;
+  }
+
+  .index__day-list--last-year,
+  .index__day-list-head--last-year {
+    grid-column: 3 / span 1;
+  }
 }
