@@ -2,6 +2,38 @@
 layout: base
 title: COVID19 in Austria
 ---
+{% from "daily-macros.njk" import incidenceBarChart,
+                                  vaccinationProgressChart %}
+
 {% set currentPermalink = '/daily/' + daily[daily.length -1].date | formatDate('YYYY-MM-DD') + '/' %}
-<meta http-equiv="refresh" content="0; url={{ currentPermalink }}">
-<a href="{{ currentPermalink }}">See newest data</a>
+
+<div id="index" class="layout index">
+  <div class="layout__title index__title">
+    <h1><span>Covid19</span> in Österreich</h1>
+  </div>
+  
+  <div class="layout__date index__date">
+    <div class="weekday">{{ daily[daily.length -1].date | formatDate('dddd') | translateDate }},</div>
+    <div class="date">{{ daily[daily.length -1].date | formatDate('DD. MMMM, YYYY') | translateDate }}</div>
+  </div>
+  
+  <div class="index__latest"><a href="{{ currentPermalink }}">Direktlink zu den neuesten Daten</a></div>
+  
+  <div class="index__update">
+    <em>{{ daily | daysSinceFirstCase(currentDate) }} Tage</em> seit dem ersten Fall in Österreich. 
+    Neueste Daten vom <em>{{ daily[daily.length - 1].date | formatDate('DD. MMMM YYYY') | translateDate }}</em>.
+    Zuletzt aktualisiert am 
+    <em>{{ currentDate | formatDate('DD. MMMM YYYY') | translateDate }}</em> um 
+    <em>{{ currentDate | formatDate('HH:mm') }}</em>. 
+  </div>
+  
+  <div class="index__chart index__chart--incidence">
+    {{ incidenceBarChart(daily | recordsUntil(record.date) | arraySlice(-60) | recordsForProvince(10), 'Österreich') }}
+  </div>
+  
+  {% if daily[daily.length - 1].vaccinationsAustria %}
+    <div class="index__chart index__chart--vaccination-progress">
+      {{ vaccinationProgressChart(daily[daily.length - 1].vaccinationsAustria, 'Österreich') }}
+    </div>
+  {% endif %}
+</div>

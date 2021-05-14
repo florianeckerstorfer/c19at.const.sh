@@ -55,6 +55,16 @@ body {
   font-feature-settings: 'calt' 1;
 }
 
+figure {
+  margin: 0;
+}
+
+figcaption {
+  color: #999;
+  font-size: 0.85rem;
+  text-align: center;
+}
+
 a:link,
 a:active,
 a:visited {

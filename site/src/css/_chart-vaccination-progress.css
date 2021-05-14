@@ -1,0 +1,25 @@
+.chart-vaccination-progress {
+  display: block;
+  margin-bottom: 0.25rem;
+  width: 100%;
+}
+
+.chart-vaccination-progress text {
+  /* font-size = target-font-size / (min-image-width / viewbox-width) */
+  /* font-size = 12 / (280 / 300) */
+  font-size: calc(12.8px + -6.4 * ((100vw - 320px) / 320));
+}
+
+@media screen and (min-width: 650px) {
+  .chart-vaccination-progress text {
+    /* font-size = 12 / (293 / 300) */
+    font-size: calc(12.29px + -6.14 * ((100vw - 650px) / 650));
+  }
+}
+
+@media screen and (min-width: 950px) {
+  .chart-vaccination-progress text {
+    /* font-size = 12 / (287 / 300) */
+    font-size: calc(12.54px + -6.27 * ((100vw - 950px) / 950));
+  }
+}

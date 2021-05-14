@@ -19,8 +19,8 @@ permalink: "daily/{{ record.date|formatDate('YYYY-MM-DD') }}/index.html"
 
 {% set prevRecord = pagination.pages[pagination.pageNumber - 1] %}
 
-<div id="daily" class="daily">
-  <div class="daily__title">
+<div id="daily" class="layout daily">
+  <div class="layout__title daily__title">
     <h1><span>Covid19</span> in Österreich</h1>
   </div>
   
@@ -38,9 +38,9 @@ permalink: "daily/{{ record.date|formatDate('YYYY-MM-DD') }}/index.html"
   {% endif -%}
   </nav>
   
-  <div class="daily__date">
+  <div class="layout__date daily__date">
     <div class="weekday">{{ record.date | formatDate('dddd') | translateDate }},</div>
-    <div class="date">{{ record.date | formatDate('MMMM DD, YYYY') | translateDate }}</div>
+    <div class="date">{{ record.date | formatDate('DD. MMMM, YYYY') | translateDate }}</div>
   </div>
   
   <div class="daily__update">
@@ -117,8 +117,3 @@ permalink: "daily/{{ record.date|formatDate('YYYY-MM-DD') }}/index.html"
   {% endfor %}
   
 </div>
-
-<pre class="recorddump">
-{{ record | formatJSON }}
-</pre>
-
