@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="no-js">
+<html lang="de" class="no-js">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width">
@@ -17,23 +17,27 @@
   <meta name="description" content="{{ description or metadata.description }}">
   <meta property="og:title" content="{{ title or metadata.title }}">
   <meta property="og:description" content="{{ description or metadata.description }}">
-  <meta property="og:image" content="https://www.mywebsite.com/image.jpg">
-  <meta property="og:image:alt" content="Image description">
-  <meta property="og:locale" content="en_GB">
+  {# <meta property="og:image" content="https://www.mywebsite.com/image.jpg"> #}
+  {# <meta property="og:image:alt" content="Image description"> #}
+  <meta property="og:locale" content="de_AT">
   <meta property="og:type" content="website">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta property="og:url" content="https://www.mywebsite.com/page">
-  <link rel="canonical" href="https://www.mywebsite.com/page">
+  {# <meta name="twitter:card" content="summary_large_image"> #}
+  <meta property="og:url" content="{{ metadata.url }}/{{ url }}">
+  <link rel="canonical" href="{{ metadata.url }}/{{ url }}">
 
   <link rel="icon" href="/favicon.ico">
   <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="manifest" href="/manifest.webmanifest">
-  <meta name="theme-color" content="#96594F">
+  <meta name="theme-color" content="#000000">
 </head>
 
 <body>
   {{ content | safe }}
-  <script src="/assets/js/script.js" type="module"></script>
+  
+  <footer class="footer">
+    <a href="https://const.sh">const.sh</a>.
+    Gebaut von <a href="https://florian.ec">Florian Eckerstorfer</a> in Wien, Europa.
+  </footer>
 </body>
 </html>
