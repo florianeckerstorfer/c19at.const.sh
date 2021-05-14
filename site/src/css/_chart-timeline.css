@@ -1,0 +1,139 @@
+.chart-timeline {
+  width: 100%;
+  margin-bottom: 0.25rem;
+  position: relative;
+}
+
+.chart-timeline__line {
+  font-size: 12px;
+  left: 0;
+  line-height: 14px;
+  position: absolute;
+  width: 100%;
+}
+
+.chart-timeline__line::before {
+  content: ' ';
+  width: 100%;
+  left: 0;
+  height: 1px;
+  background: #aaa;
+  z-index: 11;
+  position: absolute;
+}
+
+.chart-timeline__line span {
+  background: var(--dashboard-bg-color);
+  display: inline-block;
+  margin-top: 1px;
+  padding: 1px;
+  position: absolute;
+  z-index: 11;
+}
+
+.chart-timeline__line--max-incidence {
+  top: 0;
+}
+
+.chart-timeline__line--current-incidence::before {
+  background: var(--french-raspberry);
+}
+
+.chart-timeline__bars rect {
+  fill: var(--dark);
+}
+
+.chart-timeline__bars rect:last-child {
+  fill: var(--french-raspberry);
+}
+
+.chart-timeline__bars rect:hover {
+  fill: var(--french-raspberry);
+}
+
+.chart-timeline__bars--incidence rect {
+  display: none;
+  transform: translateX(-0.5px);
+  width: 3px;
+}
+
+.chart-timeline__bars--incidence rect:nth-child(2n) {
+  display: block;
+}
+
+.chart-timeline__bar-legends-text {
+  font-size: 12px;
+  left: 0;
+  line-height: 14px;
+  position: absolute;
+  width: 100%;
+}
+
+.chart-timeline__bar-legends-text span {
+  position: absolute;
+  display: none;
+  margin-left: -16.21px;
+  top: 0;
+}
+
+.chart-timeline__bar-legends-text span:nth-child(2),
+.chart-timeline__bar-legends-text span:nth-child(20n) {
+  display: inline-block;
+}
+
+.chart-timeline__bar-legends-text span:first-child {
+  margin-left: 0;
+}
+
+.chart-timeline__bar-legends-text span:last-child {
+  margin-left: -32.42px;
+}
+
+.chart-timeline__image {
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+}
+
+.chart-timeline__bar-legends line {
+  display: none;
+}
+
+.chart-timeline__bar-legends line:nth-child(2),
+.chart-timeline__bar-legends line:nth-child(20n) {
+  display: block;
+}
+
+@media (min-width: 650px) {
+  .chart-timeline__bar-legends-text span:nth-child(2),
+  .chart-timeline__bar-legends-text span:nth-child(20n) {
+    display: none;
+  }
+
+  .chart-timeline__bar-legends-text span:first-child,
+  .chart-timeline__bar-legends-text span:nth-child(15n) {
+    display: inline-block;
+  }
+
+  .chart-timeline__bar-legends-text span:first-child {
+    margin-left: 0;
+  }
+
+  .chart-timeline__bars--incidence rect {
+    display: block;
+    transform: translateX(0);
+    width: 2px;
+  }
+
+  .chart-timeline__bar-legends line:nth-child(2),
+  .chart-timeline__bar-legends line:nth-child(20n) {
+    display: none;
+  }
+
+  .chart-timeline__bar-legends line:first-child,
+  .chart-timeline__bar-legends line:nth-child(15n) {
+    display: block;
+  }
+}

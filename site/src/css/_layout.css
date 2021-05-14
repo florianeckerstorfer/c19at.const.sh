@@ -25,6 +25,14 @@
   font-style: italic;
 }
 
+.layout__title a:link,
+.layout__title a:active,
+.layout__title a:visited,
+.layout__title a:hover {
+  color: var(--dark-contrast);
+  text-decoration: none;
+}
+
 .layout__date {
   background: var(--dark);
   color: var(--dark-contrast);

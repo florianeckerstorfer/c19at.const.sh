@@ -14,6 +14,40 @@
   padding: 0.25rem;
 }
 
+.index__day-list-head,
+.index__day-list {
+  grid-column: span 2;
+}
+
+.index__day-list-head {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 0.25rem;
+}
+
+.index__day-list-head h2 {
+  font-size: var(--title-font-size);
+  margin: 0;
+}
+
+.index__day-list-head .tagline {
+  font-size: 0.85rem;
+  flex-basis: 100%;
+}
+
+.index__day-list ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.index__day-list li {
+  padding: 0 0.25rem;
+}
+
 .index__chart {
   grid-column: span 2;
   padding: 0.25rem;
@@ -21,12 +55,12 @@
 
 .index__chart .chart-incidence {
   width: 100%;
-  height: 50px;
+  height: 100px;
 }
 
 @media screen and (min-width: 650px) {
   .index__date {
-    grid-column: 1 / span 1;
+    grid-column: span 2;
   }
 
   .index__latest {
@@ -36,11 +70,34 @@
   .index__chart {
     grid-column: span 1;
   }
+
+  .index__chart--timeline {
+    grid-column: span 2;
+  }
+
+  .index__day-list,
+  .index__day-list-head {
+    grid-column: span 1;
+  }
+
+  .index__day-list--last-week,
+  .index__day-list-head--last-week {
+    grid-column: 1 / span 1;
+  }
+
+  .index__day-list--last-year,
+  .index__day-list-head--last-year {
+    grid-column: 2 / span 1;
+  }
 }
 
 @media screen and (min-width: 950px) {
   .index__title {
     grid-column: span 3;
+  }
+
+  .index__date {
+    grid-column: 1 / span 1;
   }
 
   .index__latest {
@@ -51,13 +108,8 @@
     grid-column: 1 / span 1;
   }
 
-  .index__chart--incidence {
-    grid-column: 2 / span 1;
-    grid-row: 3;
-  }
-
-  .index__chart--vaccination-progress {
-    grid-column: 3 / span 1;
+  .index__chart--timeline {
+    grid-column: 2 / span 2;
     grid-row: 3;
   }
 }

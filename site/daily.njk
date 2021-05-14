@@ -19,35 +19,37 @@ permalink: "daily/{{ record.date|formatDate('YYYY-MM-DD') }}/index.html"
 
 {% set prevRecord = pagination.pages[pagination.pageNumber - 1] %}
 
+{% set currentPermalink = '/daily/' + pagination.pages[pagination.pages.length -1].date | formatDate('YYYY-MM-DD') + '/' %}
+
 <div id="daily" class="layout daily">
   <div class="layout__title daily__title">
-    <h1><span>Covid19</span> in Österreich</h1>
+    <h1><a href="/"><span>Covid19</span> in Österreich</a></h1>
   </div>
   
   <nav class="daily__date-nav daily__date-nav--previous">
   {%- if pagination.pageNumber > 0 %}
       <a href="{{ pagination.href.previous }}">Previous day</a>
-      <div class="date">{{ pagination.page.previous.date | formatDate('MMM DD') | translateDate }}</div>
+      <div class="date">{{ pagination.page.previous.date | formatDate('D. MMM') | translateDate }}</div>
   {% endif -%}
   </nav>
   
   <nav class="daily__date-nav daily__date-nav--next">
   {%- if pagination.page.next %}
       <a href="{{ pagination.href.next }}">Next day</a>
-      <div class="date">{{ pagination.page.next.date | formatDate('MMM DD') | translateDate }}</div>
+      <div class="date">{{ pagination.page.next.date | formatDate('D. MMM') | translateDate }}</div>
   {% endif -%}
   </nav>
   
   <div class="layout__date daily__date">
     <div class="weekday">{{ record.date | formatDate('dddd') | translateDate }},</div>
-    <div class="date">{{ record.date | formatDate('DD. MMMM, YYYY') | translateDate }}</div>
+    <div class="date">{{ record.date | formatDate('D. MMMM, YYYY') | translateDate }}</div>
   </div>
   
   <div class="daily__update">
     <em>{{ pagination.pages | daysSinceFirstCase(record.date) }} Tage</em> seit dem ersten Fall in Österreich. 
-    Neueste Daten vom <em>{{ pagination.pages[pagination.pages.length - 1].date | formatDate('DD. MMMM YYYY') | translateDate }}</em>.
+    Neueste Daten vom <a href="{{ currentPermalink }}"><em>{{ pagination.pages[pagination.pages.length - 1].date | formatDate('D. MMMM YYYY') | translateDate }}</em></a>.
     Zuletzt aktualisiert am 
-    <em>{{ currentDate | formatDate('DD. MMMM YYYY') | translateDate }}</em> um 
+    <em>{{ currentDate | formatDate('D. MMMM YYYY') | translateDate }}</em> um 
     <em>{{ currentDate | formatDate('HH:mm') }}</em>. 
   </div>
   

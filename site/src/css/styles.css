@@ -3,5 +3,6 @@
 @import './_base.css';
 @import './_layout.css';
 @import './_chart-vaccination-progress.css';
+@import './_chart-timeline.css';
 @import './_index.css';
 @import './_daily.css';

@@ -2,8 +2,62 @@
 layout: base
 title: COVID19 in Austria
 ---
-{% from "daily-macros.njk" import incidenceBarChart,
-                                  vaccinationProgressChart %}
+{% from "daily-macros.njk" import renderChangeIcon %}
+
+{% macro timelineChart(records, province) %}
+{% set imageWidth = 300 %}
+{% set imageHeight = 120 %}
+{% set barHeight7DI = 100 %}
+{% set dayCount = records | length %}
+{% set barGap = (imageWidth / dayCount) / 5 %}
+{% set barWidth = (imageWidth / dayCount) - barGap %}
+{% set maxIncidence = records | maxIncidence %}
+<figure>
+  <div class="chart-timeline" style="height: {{ imageHeight }}px">
+    <div class="chart-timeline__bar-legends-text" style="top: {{ barHeight7DI + 5 }}px">
+      {% for record in records %}
+        {% set x = loop.index0 * (barWidth + barGap) + (barWidth / 2) %}
+        {% set left -%}
+          {%- if loop.first -%}0
+          {%- elif loop.last -%}100
+          {%- else -%}{{ (100 / imageWidth) * x }}
+          {%- endif -%}
+        {% endset %}
+        <span style="left: {{ left }}%">{{ record.date | formatDate('DD.MM') }}</span>
+      {% endfor %}
+    </div>
+    <svg class="chart-timeline__image" height="{{ imageHeight }}" viewBox="0 0 300 {{ imageHeight }}" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+      <g class="chart-timeline__bars chart-timeline__bars--incidence">
+        {% for record in records %}
+          {% set recordHeight = (barHeight7DI / maxIncidence) * record.sevenDayIncidence %}
+          <rect x="{{ loop.index0 * (barWidth + barGap) }}" 
+                y="{{ barHeight7DI - recordHeight }}"
+                width="{{ barWidth }}" 
+                height="{{ recordHeight }}"></rect>
+        {% endfor %}
+      </g>
+      <g class="chart-timeline__bar-legends">
+        {% for record in records %}
+          {% set x = loop.index0 * (barWidth + barGap) + (barWidth / 2) %}
+          <line x1="{{ x }}" x2="{{ x }}" y1="{{ barHeight7DI }}" y2="{{ barHeight7DI + 5}}" stroke="#ccc"></line>
+        {% endfor %}
+      </g>
+    </svg>
+    <div class="chart-timeline__line chart-timeline__line--max-incidence">
+      <span>{{ maxIncidence | round | formatNumber }} <em>7TI</em></span>
+    </div>
+    {% set currentIncidence = records[records.length - 1].sevenDayIncidence %}
+    {% set currentIncidenceHeight = (barHeight7DI / maxIncidence) * currentIncidence %}
+    <div class="chart-timeline__line chart-timeline__line--current-incidence" style="top: {{ barHeight7DI - currentIncidenceHeight }}px">
+      <span>
+        {{ currentIncidence | round | formatNumber }}
+        <em>7DI</em>
+      </span>
+    </div>
+  </div>
+  <figcaption>7-Tage-Inzidenz (7TI) in Österreich in den letzten {{ dayCount }} Tagen</figcaption>
+</figure>
+{% endmacro %}
 
 {% set currentPermalink = '/daily/' + daily[daily.length -1].date | formatDate('YYYY-MM-DD') + '/' %}
 
@@ -13,27 +67,64 @@ title: COVID19 in Austria
   </div>
   
   <div class="layout__date index__date">
-    <div class="weekday">{{ daily[daily.length -1].date | formatDate('dddd') | translateDate }},</div>
-    <div class="date">{{ daily[daily.length -1].date | formatDate('DD. MMMM, YYYY') | translateDate }}</div>
+    <div class="weekday">{{ currentDate | formatDate('dddd') | translateDate }},</div>
+    <div class="date">{{ currentDate | formatDate('D. MMMM, YYYY') | translateDate }}</div>
   </div>
-  
-  <div class="index__latest"><a href="{{ currentPermalink }}">Direktlink zu den neuesten Daten</a></div>
   
   <div class="index__update">
     <em>{{ daily | daysSinceFirstCase(currentDate) }} Tage</em> seit dem ersten Fall in Österreich. 
-    Neueste Daten vom <em>{{ daily[daily.length - 1].date | formatDate('DD. MMMM YYYY') | translateDate }}</em>.
+    Neueste Daten vom <a href="{{ currentPermalink }}"><em>{{ daily[daily.length - 1].date | formatDate('D. MMMM YYYY') | translateDate }}</em></a>.
     Zuletzt aktualisiert am 
-    <em>{{ currentDate | formatDate('DD. MMMM YYYY') | translateDate }}</em> um 
+    <em>{{ currentDate | formatDate('D. MMMM YYYY') | translateDate }}</em> um 
     <em>{{ currentDate | formatDate('HH:mm') }}</em>. 
   </div>
   
-  <div class="index__chart index__chart--incidence">
-    {{ incidenceBarChart(daily | recordsUntil(record.date) | arraySlice(-60) | recordsForProvince(10), 'Österreich') }}
+  <div class="index__chart index__chart--timeline">
+    {{ timelineChart(daily | recordsUntil(record.date) | arraySlice(-120) | recordsForProvince(10), 'Österreich') }}
   </div>
   
-  {% if daily[daily.length - 1].vaccinationsAustria %}
-    <div class="index__chart index__chart--vaccination-progress">
-      {{ vaccinationProgressChart(daily[daily.length - 1].vaccinationsAustria, 'Österreich') }}
-    </div>
-  {% endif %}
+  <div class="index__day-list-head index__day-list-head--last-week">
+    <h2>Letzte Woche</h2>
+    <div class="tagline">Mit 7-Tage-Inzidenz</div>
+  </div>
+  <div class="index__day-list index__day-list--last-week">
+    <ul>
+      {% for record in daily | arraySlice(-7) | reverse %}
+        {% set prevRecord = daily | recordForDate(record.date, 1, 'day') %}
+        {% set permalink = '/daily/' + record.date | formatDate('YYYY-MM-DD') + '/' %}
+        <li class="daily__table-row">
+          <div class="label"><a href="{{ permalink }}">{{ record.date | formatDate('D. MMMM') | translateDate }}</a></div>
+          <div class="spacer"></div>
+          <div class="number">{{ record.austria.sevenDayIncidence | round | formatNumber }}</div>
+          {% if prevRecord %}
+            {{ renderChangeIcon(record.austria.sevenDayIncidence, prevRecord.austria.sevenDayIncidence, true) }}
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+  
+  <div class="index__day-list-head index__day-list-head--last-year">
+    <h2>Letztes Jahr</h2>
+    <div class="tagline">Mit 7-Tage-Inzidenz</div>
+  </div>
+  <div class="index__day-list index__day-list--last-year">
+    <ul>
+      {% for record in daily | arraySlice(-365) | reverse %}
+        {% set prevRecord = daily | recordForDate(record.date, 1, 'month') %}
+        {% set dayOfMonth = record.date | formatDate('D') %}
+        {% if dayOfMonth === '1' %}
+        {% set permalink = '/daily/' + record.date | formatDate('YYYY-MM-DD') + '/' %}
+        <li class="daily__table-row">
+          <div class="label"><a href="{{ permalink }}">{{ record.date | formatDate('D. MMMM') | translateDate }}</a></div>
+          <div class="spacer"></div>
+          <div class="number">{{ record.austria.sevenDayIncidence | round | formatNumber }}</div>
+          {% if prevRecord %}
+            {{ renderChangeIcon(record.austria.sevenDayIncidence, prevRecord.austria.sevenDayIncidence, true) }}
+        {% endif %}
+        </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </div>
 </div>
