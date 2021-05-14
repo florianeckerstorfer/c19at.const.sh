@@ -1,0 +1,13 @@
+image: alpine/edge
+packages:
+  - nodejs
+  - npm
+sources:
+  - https://git.sr.ht/~fec/c19at.const.sh
+tasks:
+  - setup: |
+      cd c19at.const.sh
+      npm install
+  - build: |
+      cd c19at.const.sh
+      npm run build
