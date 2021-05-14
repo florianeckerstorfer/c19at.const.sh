@@ -31,6 +31,11 @@
   z-index: 11;
 }
 
+.chart-timeline__line--current-incidence span {
+  background: var(--french-raspberry);
+  color: var(--french-raspberry-contrast);
+}
+
 .chart-timeline__line--max-incidence {
   top: 0;
 }

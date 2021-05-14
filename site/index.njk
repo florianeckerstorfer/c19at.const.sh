@@ -44,14 +44,13 @@ title: COVID19 in Austria
       </g>
     </svg>
     <div class="chart-timeline__line chart-timeline__line--max-incidence">
-      <span>{{ maxIncidence | round | formatNumber }} <em>7TI</em></span>
+      <span><em>7TI</em>={{ maxIncidence | round | formatNumber }}</span>
     </div>
     {% set currentIncidence = records[records.length - 1].sevenDayIncidence %}
     {% set currentIncidenceHeight = (barHeight7DI / maxIncidence) * currentIncidence %}
     <div class="chart-timeline__line chart-timeline__line--current-incidence" style="top: {{ barHeight7DI - currentIncidenceHeight }}px">
       <span>
-        {{ currentIncidence | round | formatNumber }}
-        <em>7DI</em>
+        <em>7TI</em>={{ currentIncidence | round | formatNumber }}
       </span>
     </div>
   </div>
