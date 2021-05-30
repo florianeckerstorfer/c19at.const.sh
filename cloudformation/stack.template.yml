@@ -1,0 +1,181 @@
+Description: Stack to setup static hosting for a website. Creates a S3 bucket, a Cloudfront distribution and a Lambda function to add security headers.
+
+Parameters:
+  AcmCertificateArn:
+    AllowedPattern: ^$|(arn:aws:acm:)([a-z0-9/:-])*([a-z0-9])$
+    Description: ARN of a certificate used by the CloudFront distribution (has to be in us-east-1)
+    Type: String
+
+  SiteName:
+    AllowedPattern: ^([a-zA-Z0-9]+)$
+    Description: Name of the site
+    Type: String
+
+  DomainName:
+    AllowedPattern: ^$|(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\-]*[A-Za-z0-9])$
+    Description: Domain name of the website
+    Type: String
+
+  Path:
+    Description: The path within the S3 bucket where the distribution should point to. Start with a slash, do NOT end with a slash. Typically points to a version folder.
+    Type: String
+    AllowedPattern: ^|/.*$
+    Default: ''
+
+  DefaultRootObject:
+    Description: The name of the default root object, ie. the object that is being loaded if no path is provided by the client. Do not include a leading slash.
+    Type: String
+    Default: index.html
+
+Resources:
+  S3Bucket:
+    Type: AWS::S3::Bucket
+    DeletionPolicy: Delete
+    Properties:
+      AccessControl: PublicRead
+      WebsiteConfiguration:
+        IndexDocument: index.html
+        ErrorDocument: error.html
+
+  S3BucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref S3Bucket
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Sid: PublicReadForGetBucketObjects
+            Effect: Allow
+            Principal: '*'
+            Action: s3:GetObject
+            Resource: !Sub arn:aws:s3:::${S3Bucket}/*
+
+  CloudFrontCachePolicy:
+    Type: AWS::CloudFront::CachePolicy
+    Properties:
+      CachePolicyConfig:
+        # Name should be alphanumeric, no spaces, no special characters
+        Name: !Sub ${SiteName}CachePolicy
+        DefaultTTL: 86400
+        MaxTTL: 31536000
+        MinTTL: 1
+        ParametersInCacheKeyAndForwardedToOrigin:
+          EnableAcceptEncodingBrotli: true
+          EnableAcceptEncodingGzip: true
+          CookiesConfig:
+            CookieBehavior: none
+          QueryStringsConfig:
+            QueryStringBehavior: none
+          HeadersConfig:
+            HeaderBehavior: whitelist
+            Headers:
+              - 'content-security-policy'
+              - 'x-content-type-options'
+              - 'x-frame-options'
+              - 'x-xss-protection'
+              - 'referrer-policy'
+
+  CloudFrontDistribution:
+    Type: AWS::CloudFront::Distribution
+    Properties:
+      DistributionConfig:
+        Comment: !Sub ${DomainName} Distribution
+        Aliases:
+          - !Ref DomainName
+        Enabled: true
+
+        Origins:
+          - DomainName: !Select [2, !Split ['/', !GetAtt S3Bucket.WebsiteURL]]
+            Id: S3BucketOrigin
+            OriginPath: !Sub ${Path}
+            CustomOriginConfig:
+              OriginProtocolPolicy: http-only
+
+        PriceClass: PriceClass_100
+
+        HttpVersion: http2
+        IPV6Enabled: true
+
+        ViewerCertificate:
+          AcmCertificateArn: !Ref AcmCertificateArn
+          SslSupportMethod: sni-only
+          MinimumProtocolVersion: TLSv1.2_2018
+
+        DefaultRootObject: !Ref DefaultRootObject
+        DefaultCacheBehavior:
+          AllowedMethods:
+            - GET
+            - HEAD
+          TargetOriginId: S3BucketOrigin
+          ViewerProtocolPolicy: redirect-to-https
+          CachePolicyId: !Ref CloudFrontCachePolicy
+          Compress: true
+          LambdaFunctionAssociations:
+            - EventType: origin-response
+              LambdaFunctionARN: !Ref LambdaFunctionVersion
+
+  LambdaRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - lambda.amazonaws.com
+                - edgelambda.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+
+  LambdaFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      Description: Adds HTTP headers to the origin response
+      Handler: originresponse.handler
+      MemorySize: 128
+      Role: !GetAtt LambdaRole.Arn
+      Runtime: nodejs12.x
+      Timeout: 5
+      Code: ../build/lambda.zip
+
+  LambdaFunctionVersion:
+    Type: AWS::Lambda::Version
+    Properties:
+      FunctionName: !GetAtt LambdaFunction.Arn
+
+  CiUploadGroup:
+    Type: AWS::IAM::Group
+    Properties:
+      GroupName: !Sub ${SiteName}Group
+      Policies:
+        - PolicyName: !Sub ${SiteName}DeployPolicy
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action:
+                  - 's3:PutObject'
+                  - 's3:Get*'
+                  - 's3:List*'
+                  - 's3:DeleteObject'
+                  - 'cloudfront:CreateInvalidation'
+                  - 'cloudfront:ListInvalidations'
+                  - 'cloudfront:GetInvalidation'
+                Resource:
+                  - !Sub arn:aws:s3:::${S3Bucket}
+                  - !Sub arn:aws:s3:::${S3Bucket}/*
+                  - !Join
+                    - ''
+                    - - 'arn:aws:cloudfront::'
+                      - !Ref 'AWS::AccountId'
+                      - ':distribution/'
+                      - !Ref CloudFrontDistribution
+
+  CiUploadUser:
+    Type: AWS::IAM::User
+    Properties:
+      Groups:
+        - !Ref CiUploadGroup
+      UserName: !Sub ${SiteName}User

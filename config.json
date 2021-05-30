@@ -1,0 +1,9 @@
+{
+  "region": "us-east-1",
+  "stackName": "ConstShC19At",
+  "siteName": "ConstShC19At",
+  "domainName": "c19at.const.sh",
+  "certificateArn": "arn:aws:acm:us-east-1:416408785896:certificate/28d7820b-179f-41a4-8399-38c03df5cf16",
+  "s3Bucket": "constshc19at-s3bucket-12o9e6sez9ycn",
+  "distributionId": "E2EF5YJFH129N4"
+}
