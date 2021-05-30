@@ -13,7 +13,7 @@ Made by [Florian Eckerstorfer](https://florian.ec) in Vienna, Europe.
 Setup:
 
 ```shell
-git clone https://git.sr.ht/~fec/c19at.const.sh
+git clone git@github.com:florianeckerstorfer/c19at.const.sh.git
 cd c19at.const.sh
 npm install
 ```
@@ -32,8 +32,8 @@ npm run build
 
 ## Code of Conduct
 
-See [CODE_OF_CONDUCT.md](https://git.sr.ht/~fec/c19at.const.sh/tree/main/item/CODE_OF_CONDUCT.md)
+See [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)
 
 ## License
 
-See [LICENSE](https://git.sr.ht/~fec/c19at.const.sh/tree/main/item/LICENSE)
+See [LICENSE](LICENSE)
