@@ -123,7 +123,7 @@
 <div id="total-top-cases" 
    class="daily__table-head daily__table-head--total-top-cases">
    <h2>Gesamtzahlen <span>im Östereichvergleich</span></h2>
-   <div class="tagline">Fälle pro 100.000 Einwohner seit {{ record.date | formatDate('DD. MMMM') | translateDate }}</div>
+   <div class="tagline">Fälle pro 100.000 Einwohner seit {{ firstRecord.date | formatDate('DD.MM.YYYY') }}</div>
 </div>
 <div class="daily__table daily__table--total-top-cases">
   {% for province in record.provinces | sortByCasesTotal %}
