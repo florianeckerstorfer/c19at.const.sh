@@ -8,7 +8,7 @@ exports.handler = (event, context, callback) => {
     {
       key: 'Content-Security-Policy',
       value:
-        "default-src 'none'; script-src 'self' gc.zgo.at; object-src 'none'; style-src 'self'; img-src 'self'; media-src 'none'; frame-src 'none'; font-src 'self'; connect-src 'self'",
+        "default-src 'none'; script-src 'self' gc.zgo.at; object-src 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data: c19at.goatcounter.com; media-src 'none'; frame-src 'none'; font-src 'self'; connect-src 'self'",
     },
   ];
 
