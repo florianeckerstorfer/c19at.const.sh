@@ -1,8 +1,8 @@
-const readRecentCases = require('../lib/read-data/read-recent-cases');
-const processRecentCases = require('../lib/process-data/process-recent-cases');
+const readMorningReport = require('../lib/read-data/read-morning-report');
+const processMorningReport = require('../lib/process-data/process-morning-report');
 
 module.exports = async function () {
-  const recentCases = await readRecentCases();
-  const processed = processRecentCases(recentCases);
+  const recentCases = await readMorningReport();
+  const processed = processMorningReport(recentCases);
   return processed;
 };

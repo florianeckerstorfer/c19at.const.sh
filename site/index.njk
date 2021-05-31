@@ -5,8 +5,12 @@ title: COVID19 in Austria
 {% from "daily-macros.njk" import renderChangeIcon %}
 {% from "macros.njk" import dataSources %}
 
+{% set latestDaily = daily | last %}
 {% set morningReportToday = morningReport | last %}
 {% set morningReportYesterday = morningReport | arraySlice(-2) | first %}
+
+{% set morningToday7DI = (morningReportToday.austria.sevenDayTotal / latestDaily.austria.inhabitants) * 100000 %}
+{% set morningYesterday7DI = (morningReportYesterday.austria.sevenDayTotal / latestDaily.austria.inhabitants) * 100000 %}
 
 {% macro timelineChart(records, province) %}
 {% set imageWidth = 300 %}
@@ -96,6 +100,14 @@ title: COVID19 in Austria
   </div>
   <div class="index__day-list index__day-list--morning-report">
     <ul>
+    <li class="daily__table-row">
+      <div class="label">7-Tage-Inzidenz</div>
+      <div class="spacer"></div>
+      <div class="number">
+        {{ morningToday7DI | round | formatNumber }}
+      </div>
+      {{ renderChangeIcon(morningToday7DI, morningYesterday7DI, true) }}
+    </li>
       <li class="daily__table-row">
         <div class="label">Neue Fälle</div>
         <div class="spacer"></div>

@@ -1,9 +1,11 @@
 const _ = require('lodash');
 const dayjs = require('dayjs');
 const customParseFormat = require('dayjs/plugin/customParseFormat');
+const isSameOrAfter = require('dayjs/plugin/isSameOrAfter');
 const { isAustria, isProvince } = require('../data-helper');
 
 dayjs.extend(customParseFormat);
+dayjs.extend(isSameOrAfter);
 
 module.exports = function (caseTimeline) {
   return _.chain(caseTimeline)
@@ -28,6 +30,12 @@ module.exports = function (caseTimeline) {
     .groupBy((record) => record.dateYYYYMMDD)
     .flatMap((dailyRecord, index, dailyRecords) => {
       return dailyRecord.map((record) => {
+        const prevWeekDate = record.date.subtract(7, 'days').format('YYYYMMDD');
+        const prevWeekRecords = dailyRecords[prevWeekDate] || [];
+        const prevWeekRecord =
+          prevWeekRecords.find((r) => r.provinceId === record.provinceId) || {};
+        const prevWeekCasesTotal = prevWeekRecord.casesTotal || 0;
+
         const prevDate = record.date.subtract(1, 'day').format('YYYYMMDD');
         const prevRecords = dailyRecords[prevDate] || [];
         const prevRecord =
@@ -38,8 +46,10 @@ module.exports = function (caseTimeline) {
         const prevTestsTotal = prevRecord.testsTotal || 0;
         const prevPcrTestsTotal = prevRecord.pcrTestsTotal || 0;
         const prevAntigenTestsTotal = prevRecord.antigenTestsTotal || 0;
+
         return {
           ...record,
+          sevenDayTotal: record.casesTotal - prevWeekCasesTotal,
           casesDaily: record.casesTotal - prevCasesTotal,
           deathsDaily: record.deathsTotal - prevDeathsTotal,
           curedDaily: record.curedTotal - prevCuredTotal,
