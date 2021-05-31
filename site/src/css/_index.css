@@ -103,7 +103,8 @@
   }
 
   .index__day-list--last-year,
-  .index__day-list-head--last-year {
+  .index__day-list-head--last-year .index__day-list--inflection-points,
+  .index__day-list-head--inflection-points {
     grid-column: 2 / span 1;
   }
 }
@@ -138,7 +139,9 @@
   }
 
   .index__day-list--last-year,
-  .index__day-list-head--last-year {
+  .index__day-list-head--last-year,
+  .index__day-list--inflection-points,
+  .index__day-list-head--inflection-points {
     grid-column: 3 / span 1;
   }
 

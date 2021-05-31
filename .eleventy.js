@@ -13,6 +13,17 @@ const recordsUntilFilter = require('./site/src/filters/records-until-filter');
 const recordsForProvinceFilter = require('./site/src/filters/records-for-province-filter');
 const vaccinationRecordsForProvinceFilter = require('./site/src/filters/vaccination-records-for-province-filter');
 const recordForDateFilter = require('./site/src/filters/record-for-date-filter');
+const {
+  firstCaseRecordFilter,
+  lastCaseRecordFilter,
+  firstDeathRecordFilter,
+  lastDeathRecordFilter,
+  maxCasesRecordFilter,
+  maxSevenDayIncidenceRecordFilter,
+  maxHospitalBedsRecordFilter,
+  maxIcuBedsRecordFilter,
+  maxTestsRecordFilter,
+} = require('./site/src/filters/inflection-point-filters');
 
 module.exports = function (eleventyConfig) {
   eleventyConfig.addFilter('formatDate', formatDateFilter);
@@ -33,6 +44,21 @@ module.exports = function (eleventyConfig) {
     vaccinationRecordsForProvinceFilter
   );
   eleventyConfig.addFilter('recordForDate', recordForDateFilter);
+  eleventyConfig.addFilter('firstCaseRecord', firstCaseRecordFilter);
+  eleventyConfig.addFilter('lastCaseRecord', lastCaseRecordFilter);
+  eleventyConfig.addFilter('firstDeathRecord', firstDeathRecordFilter);
+  eleventyConfig.addFilter('lastDeathRecord', lastDeathRecordFilter);
+  eleventyConfig.addFilter('maxCasesRecord', maxCasesRecordFilter);
+  eleventyConfig.addFilter(
+    'maxSevenDayIncidenceRecord',
+    maxSevenDayIncidenceRecordFilter
+  );
+  eleventyConfig.addFilter(
+    'maxHospitalBedsRecord',
+    maxHospitalBedsRecordFilter
+  );
+  eleventyConfig.addFilter('maxIcuBedsRecord', maxIcuBedsRecordFilter);
+  eleventyConfig.addFilter('maxTestsRecord', maxTestsRecordFilter);
 
   eleventyConfig.addLayoutAlias('base', 'base.njk');
 

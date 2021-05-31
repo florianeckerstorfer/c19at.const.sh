@@ -163,6 +163,88 @@ title: COVID19 in Austria
     </ul>
   </div>
   
+  <div class="index__day-list-head index__day-list-head--inflection-points">
+    <h2>Wendepunkte der Pandemie</h2>
+  </div>
+  <div class="index__day-list index__day-list--inflection-points">
+    <ul>
+      <li class="daily__table-row">
+        <div class="label">Erster Fall</div>
+        <div class="spacer"></div>
+        <div class="number">
+          {% set firstCaseDate = (daily | firstCaseRecord).austria.date %}
+          <a href="/daily/{{ firstCaseDate | formatDate('YYYY-MM-DD') }}/">{{ firstCaseDate | formatDate('DD.MM.YYYY') }}</a>
+        </div>
+      </li>
+      <li class="daily__table-row daily__table-row--with-spacer">
+        <div class="label">Erster Todesfall</div>
+        <div class="spacer"></div>
+        <div class="number">
+          {% set firstDeathDate = (daily | firstDeathRecord).austria.date %}
+          <a href="/daily/{{ firstDeathDate | formatDate('YYYY-MM-DD') }}/">{{ firstDeathDate | formatDate('DD.MM.YYYY') }}</a>
+        </div>
+      </li>
+      
+      <li class="daily__table-row daily__table-row">
+        <div class="label">Meisten neuen Fälle</div>
+        <div class="spacer"></div>
+        <div class="number">
+          {% set maxCasesDate = (daily | maxCasesRecord).austria.date %}
+          <a href="/daily/{{ maxCasesDate | formatDate('YYYY-MM-DD') }}/">{{ maxCasesDate | formatDate('DD.MM.YYYY') }}</a>
+        </div>
+      </li>
+      <li class="daily__table-row ">
+        <div class="label">Höchste 7T-Inzidenz</div>
+        <div class="spacer"></div>
+        <div class="number">
+          {% set max7DIDate = (daily | maxSevenDayIncidenceRecord).austria.date %}
+          <a href="/daily/{{ max7DIDate | formatDate('YYYY-MM-DD') }}/">{{ max7DIDate | formatDate('DD.MM.YYYY') }}</a>
+        </div>
+      </li>
+      <li class="daily__table-row">
+        <div class="label">Höchste KH-Belegung</div>
+        <div class="spacer"></div>
+        <div class="number">
+          {% set maxHospitalBedsDate = (daily | maxHospitalBedsRecord).austria.date %}
+          <a href="/daily/{{ maxHospitalBedsDate | formatDate('YYYY-MM-DD') }}/">{{ maxHospitalBedsDate | formatDate('DD.MM.YYYY') }}</a>
+        </div>
+      </li>
+      <li class="daily__table-row">
+        <div class="label">Höchste Intensiv-Belegung</div>
+        <div class="spacer"></div>
+        <div class="number">
+          {% set maxIcuBedsDate = (daily | maxIcuBedsRecord).austria.date %}
+          <a href="/daily/{{ maxIcuBedsDate | formatDate('YYYY-MM-DD') }}/">{{ maxIcuBedsDate | formatDate('DD.MM.YYYY') }}</a>
+        </div>
+      </li>
+      <li class="daily__table-row daily__table-row--with-spacer">
+        <div class="label">Meisten Tests</div>
+        <div class="spacer"></div>
+        <div class="number">
+          {% set maxTestsDate = (daily | maxTestsRecord).austria.date %}
+          <a href="/daily/{{ maxTestsDate | formatDate('YYYY-MM-DD') }}/">{{ maxTestsDate | formatDate('DD.MM.YYYY') }}</a>
+        </div>
+      </li>
+      
+      <li class="daily__table-row">
+        <div class="label">Letzter Todesfall</div>
+        <div class="spacer"></div>
+        <div class="number">
+          {% set lastDeathDate = (daily | lastDeathRecord).austria.date %}
+          <a href="/daily/{{ lastDeathDate | formatDate('YYYY-MM-DD') }}/">{{ lastDeathDate | formatDate('DD.MM.YYYY') }}</a>
+        </div>
+      </li>
+      <li class="daily__table-row">
+        <div class="label">Letzter Fall</div>
+        <div class="spacer"></div>
+        <div class="number">
+          {% set lastCaseDate = (daily | lastCaseRecord).austria.date %}
+          <a href="/daily/{{ lastCaseDate | formatDate('YYYY-MM-DD') }}/">{{ lastCaseDate | formatDate('DD.MM.YYYY') }}</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+  
   <div class="index__day-list-head index__day-list-head--last-week">
     <h2>Letzte Woche</h2>
     <div class="tagline">Mit 7-Tage-Inzidenz</div>
