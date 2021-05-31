@@ -47,7 +47,7 @@ module.exports = function (caseTimeline) {
       austria: _.find(record, isAustria),
       provinces: _.chain(record)
         .filter(isProvince)
-        .sortBy((record) => record.provinceId)
+        .sortBy('provinceId')
         .value(),
     }))
     .value();

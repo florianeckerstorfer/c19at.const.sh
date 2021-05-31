@@ -22,6 +22,11 @@ permalink: "daily/{{ record.date|formatDate('YYYY-MM-DD') }}/index.html"
 
 {% set currentPermalink = '/daily/' + pagination.pages[pagination.pages.length -1].date | formatDate('YYYY-MM-DD') + '/' %}
 
+{% set provinces = record.provinces | sort(false, false, 'provinceId') %}
+{% set prevProvinces = prevRecord.provinces | sort(false, false, 'provinceId') %}
+{% set vaccinationsProvinces = record.vaccinationsProvinces | sort(false, false, 'provinceId') %}
+{% set prevVaccinationsProvinces = prevRecord.vaccinationsProvinces | sort(false, false, 'provinceId') %}
+
 <div id="daily" class="layout daily">
   <div class="layout__title daily__title">
     <h1><a href="/"><span>Covid19</span> in Österreich</a></h1>
@@ -82,7 +87,7 @@ permalink: "daily/{{ record.date|formatDate('YYYY-MM-DD') }}/index.html"
   
   <div class="daily__province-nav">
     <ul>
-      {% for province in record.provinces | sort(false, false, 'provinceId') %}
+      {% for province in provinces %}
         <li><a href="#province-daily-{{ province.province | slug }}">{{ province.province }}</a></li>
       {% endfor %}
     </ul>
@@ -92,8 +97,8 @@ permalink: "daily/{{ record.date|formatDate('YYYY-MM-DD') }}/index.html"
   
   {{ totalTopCases(record, pagination.pages[0]) }}
   
-  {% for province in record.provinces | sort(false, false, 'provinceId') %}
-      {{ dailyTable(province, prevRecord.provinces[loop.index0]) }}
+  {% for province in provinces %}
+      {{ dailyTable(province, prevProvinces[loop.index0]) }}
       {{ totalTable(province, pagination.pages[0]) }}
       
       <div class="daily__chart daily__chart--incidence">
@@ -104,21 +109,22 @@ permalink: "daily/{{ record.date|formatDate('YYYY-MM-DD') }}/index.html"
         {{ casesBarChart(pagination.pages | recordsUntil(record.date) | arraySlice(-60) | recordsForProvince(province.provinceId), province.province) }}
       </div>
       
-      {% if record.vaccinationsProvinces and record.vaccinationsProvinces[loop.index0] and prevRecord.vaccinationsProvinces and prevRecord.vaccinationsProvinces[loop.index0] %}
-      {{ dailyVaccinationTable(record.vaccinationsProvinces[loop.index0], prevRecord.vaccinationsProvinces[loop.index0]) }}
+      {% if vaccinationsProvinces and vaccinationsProvinces[loop.index0] and prevVaccinationsProvinces and prevVaccinationsProvinces[loop.index0] %}
+      {{ dailyVaccinationTable(vaccinationsProvinces[loop.index0], prevVaccinationsProvinces[loop.index0]) }}
       
-      {{ totalVaccinationTable(record.vaccinationsProvinces[loop.index0], prevRecord.vaccinationsProvinces[loop.index0], pagination.pages[0]) }}
+      {{ totalVaccinationTable(vaccinationsProvinces[loop.index0], prevVaccinationsProvinces[loop.index0], pagination.pages[0]) }}
       
       <div class="daily__chart daily__chart--vaccination">
         {{ vaccinationBarChart(pagination.pages | recordsUntil(record.date) | arraySlice(-60) | vaccinationRecordsForProvince(province.provinceId), province.province) }}
       </div>
       
       <div class="daily__chart daily__chart--vaccination-progress">
-        {{ vaccinationProgressChart(record.vaccinationsProvinces[loop.index0], province.province) }}
+        {{ vaccinationProgressChart(vaccinationsProvinces[loop.index0], province.province) }}
       </div>
       {% endif %}
   {% endfor %}
   
   {{ dataSources() }}
+  
   
 </div>

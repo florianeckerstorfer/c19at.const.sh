@@ -7,7 +7,8 @@ exports.handler = (event, context, callback) => {
   headers['content-security-policy'] = [
     {
       key: 'Content-Security-Policy',
-      value: "script-src 'self' 'unsafe-inline' gc.zgo.at",
+      value:
+        "default-src 'none'; script-src 'self' gc.zgo.at; object-src 'none'; style-src 'self'; img-src 'self'; media-src 'none'; frame-src 'none'; font-src 'self'; connect-src 'self'",
     },
   ];
 

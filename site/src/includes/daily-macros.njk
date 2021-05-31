@@ -3,8 +3,8 @@
   {%- if number1 === number2 %} eql
   {%- elif number1 > number2%} up
   {%- else %} down{% endif -%}
-  {%- if (downIsGood and number1 < number2) or (not downIsGood and number1 > number2) %} good
-  {%- elif number1 === number2 %} neutral
+  {%- if number1 === number2 %} neutral
+  {%- elif (downIsGood and number1 < number2) or (not downIsGood and number1 > number2) %} good
   {%- else %} bad{% endif -%}">-></span>
 {% endmacro %}
 
@@ -16,6 +16,8 @@
   <a href="#daily" class="to-top">Nach oben</a>
   {% endif %}
   <div class="tagline">Zahlen für {{ record.date | formatDate('DD. MMMM') | translateDate }}</div>
+  <div>
+  </div>
 </div>
 <div class="daily__table daily__table--daily">
   <div class="daily__table-row">
@@ -56,6 +58,30 @@
     <div class="number">{{ record.deathsDailyPerInhabitants | round | formatNumber }}</div>
     {{ renderChangeIcon(record.deathsDailyPerInhabitants, prevRecord.deathsDailyPerInhabitants, true) }}
   </div>
+  {% if record.testsDaily !== undefined %}
+  <div class="daily__table-row">
+    <div class="label">Durchgeführte Tests</div>
+    <div class="spacer"></div>
+    <div class="number">{{ record.testsDaily | formatNumber }}</div>
+    {{ renderChangeIcon(record.testsDaily, prevRecord.testsDaily, false) }}
+  </div>
+  {% endif %}
+  {% if record.hospitalBeds !== undefined %}
+  <div class="daily__table-row">
+    <div class="label">Belegte KH-Betten</div>
+    <div class="spacer"></div>
+    <div class="number">{{ record.hospitalBeds | formatNumber }}</div>
+    {{ renderChangeIcon(record.hospitalBeds, prevRecord.hospitalBeds, true) }}
+  </div>
+  {% endif %}
+{% if record.icuBeds !== undefined %}
+<div class="daily__table-row">
+  <div class="label">Belegte Intensiv-Betten</div>
+  <div class="spacer"></div>
+  <div class="number">{{ record.icuBeds | formatNumber }}</div>
+  {{ renderChangeIcon(record.icuBeds, prevRecord.icuBeds, true) }}
+</div>
+{% endif %}
 </div>
 {% endmacro %}
 
@@ -92,6 +118,13 @@
     <div class="spacer"></div>
     <div class="number">{{ record.deathsTotalPerInhabitants | round | formatNumber }}</div>
   </div>
+  {% if record.testsTotal !== undefined %}
+  <div class="daily__table-row">
+    <div class="label">Durchgeführte Tests</div>
+    <div class="spacer"></div>
+    <div class="number">{{ record.testsTotal | formatNumber }}</div>
+  </div>
+  {% endif %}
 </div>
 {% endmacro %}
 
