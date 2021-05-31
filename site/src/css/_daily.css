@@ -115,6 +115,10 @@
   justify-content: space-between;
 }
 
+.daily__table-row--with-spacer {
+  margin-bottom: 0.5rem;
+}
+
 .daily_table-row--placeholder::after {
   display: block;
   opacity: 0;

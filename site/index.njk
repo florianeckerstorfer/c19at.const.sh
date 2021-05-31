@@ -5,6 +5,9 @@ title: COVID19 in Austria
 {% from "daily-macros.njk" import renderChangeIcon %}
 {% from "macros.njk" import dataSources %}
 
+{% set morningReportToday = morningReport | last %}
+{% set morningReportYesterday = morningReport | arraySlice(-2) | first %}
+
 {% macro timelineChart(records, province) %}
 {% set imageWidth = 300 %}
 {% set imageHeight = 120 %}
@@ -87,6 +90,79 @@ title: COVID19 in Austria
     {{ timelineChart(daily | recordsUntil(record.date) | arraySlice(-120) | recordsForProvince(10), 'Österreich') }}
   </div>
   
+  <div class="index__day-list-head index__day-list-head--morning-report">
+    <h2>Morgenmeldung <a href="#morning-report-help">?</a></h2>
+    <div class="tagline">Vom {{ morningReportToday.date | formatDate('D. MMMM') | translateDate }}, Änderungen seit {{ morningReportYesterday.date | formatDate('D. MMMM') | translateDate }}</div>
+  </div>
+  <div class="index__day-list index__day-list--morning-report">
+    <ul>
+      <li class="daily__table-row">
+        <div class="label">Neue Fälle</div>
+        <div class="spacer"></div>
+        <div class="number">
+          {{ morningReportToday.austria.casesDaily | formatNumber }}
+        </div>
+        {{ renderChangeIcon(morningReportToday.austria.casesDaily, morningReportYesterday.austria.casesDaily, true) }}
+      </li>
+      <li class="daily__table-row">
+        <div class="label">Neue Todesfälle</div>
+        <div class="spacer"></div>
+        <div class="number">
+          {{ morningReportToday.austria.deathsDaily | formatNumber }}
+        </div>
+        {{ renderChangeIcon(morningReportToday.austria.deathsDaily, morningReportYesterday.austria.deathsDaily, true) }}
+      </li>
+      <li class="daily__table-row daily__table-row--with-spacer">
+        <div class="label">Neu Genesene</div>
+        <div class="spacer"></div>
+        <div class="number">
+          {{ morningReportToday.austria.curedDaily | formatNumber }}
+        </div>
+        {{ renderChangeIcon(morningReportToday.austria.curedDaily, morningReportYesterday.austria.curedDaily, false) }}
+      </li>
+      <li class="daily__table-row">
+        <div class="label">Neue Tests</div>
+        <div class="spacer"></div>
+        <div class="number">
+          {{ morningReportToday.austria.testsDaily | formatNumber }}
+        </div>
+        {{ renderChangeIcon(morningReportToday.austria.testsDaily, morningReportYesterday.austria.testsDaily, false) }}
+      </li>
+      <li class="daily__table-row">
+        <div class="label">Neue PCR-Tests</div>
+        <div class="spacer"></div>
+        <div class="number">
+          {{ morningReportToday.austria.pcrTestsDaily | formatNumber }}
+        </div>
+        {{ renderChangeIcon(morningReportToday.austria.pcrTestsDaily, morningReportYesterday.austria.pcrTestsDaily, false) }}
+      </li>
+      <li class="daily__table-row daily__table-row--with-spacer">
+        <div class="label">Neue Antigen-Tests</div>
+        <div class="spacer"></div>
+        <div class="number">
+          {{ morningReportToday.austria.antigenTestsDaily | formatNumber }}
+        </div>
+        {{ renderChangeIcon(morningReportToday.austria.antigenTestsDaily, morningReportYesterday.austria.antigenTestsDaily, false) }}
+      </li>
+      <li class="daily__table-row">
+        <div class="label">Belegte KH-Betten</div>
+        <div class="spacer"></div>
+        <div class="number">
+          {{ morningReportToday.austria.hospitalBeds | formatNumber }}
+        </div>
+        {{ renderChangeIcon(morningReportToday.austria.hospitalBeds, morningReportYesterday.austria.hospitalBeds, true) }}
+      </li>
+      <li class="daily__table-row">
+        <div class="label">Belegte Intensiv-Betten</div>
+        <div class="spacer"></div>
+        <div class="number">
+          {{ morningReportToday.austria.icuBeds | formatNumber }}
+        </div>
+        {{ renderChangeIcon(morningReportToday.austria.icuBeds, morningReportYesterday.austria.icuBeds, true) }}
+      </li>
+    </ul>
+  </div>
+  
   <div class="index__day-list-head index__day-list-head--last-week">
     <h2>Letzte Woche</h2>
     <div class="tagline">Mit 7-Tage-Inzidenz</div>
@@ -133,4 +209,11 @@ title: COVID19 in Austria
   </div>
   
   {{ dataSources() }}
+  
+  <div class="index__day-text-head index__day-text-head--morning-report-help">
+    <h2 id="morning-report-help">Morgenmeldung Erklärung</h2>
+  </div>
+  <div class="index__day-text index__day-text--morning-report-help">
+    <p>Die gemeldeten COVID-19 Zahlen der Bundesländer an den nationalen Krisenstab. In der Morgenmeldung sind die Daten dem Tag der Meldung zugeordnet, in der Regel beziehen sich die Daten auf den Vortag.
+  </div>
 </div>

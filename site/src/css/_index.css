@@ -28,6 +28,7 @@
   padding: 0.25rem;
 }
 
+.index__day-text-head h2,
 .index__day-list-head h2 {
   font-size: var(--title-font-size);
   margin: 0;
@@ -46,6 +47,20 @@
 
 .index__day-list li {
   padding: 0 0.25rem;
+}
+
+.index__day-text,
+.index__day-text-head {
+  grid-column: span 2;
+  padding: 0.25rem;
+}
+
+.index__day-text p {
+  margin: 0 0 1rem;
+}
+
+.index__day-text p:last-child {
+  margin-bottom: 0;
 }
 
 .index__chart {
@@ -81,7 +96,9 @@
   }
 
   .index__day-list--last-week,
-  .index__day-list-head--last-week {
+  .index__day-list-head--last-week,
+  .index__day-list--morning-report,
+  .index__day-list-head--morning-report {
     grid-column: 1 / span 1;
   }
 
@@ -114,12 +131,19 @@
   }
 
   .index__day-list--last-week,
-  .index__day-list-head--last-week {
+  .index__day-list-head--last-week,
+  .index__day-list--morning-report,
+  .index__day-list-head--morning-report {
     grid-column: 2 / span 1;
   }
 
   .index__day-list--last-year,
   .index__day-list-head--last-year {
     grid-column: 3 / span 1;
+  }
+
+  .index__day-text,
+  .index__day-text-head {
+    grid-column: 2 / span 2;
   }
 }
