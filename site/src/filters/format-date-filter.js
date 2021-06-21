@@ -1,3 +1,3 @@
 module.exports = function (date, format) {
-  return date.format(format);
+  return date.tz('Europe/Vienna').format(format);
 };
